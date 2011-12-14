@@ -8,13 +8,13 @@ Using this system, any person who is a part of this system will be able to commu
 Thus, this system will become a media for all education related entities stay in touch will each other anytime, share information and communicate. 
 
 #Features
-*Talks
-*Forums
-*Private Messaging 
-*Groups
-*Chat
-*Events
-*Quizzes/Competitions 
+* Talks
+* Forums
+* Private Messaging 
+* Groups
+* Chat
+* Events
+* Quizzes/Competitions 
 
 #Software Requirement Specification
 SRS can be found under /SRS.pdf which is very inconsistent and made in urgency for the sake of submitting it to college so that we can have our project selected.
