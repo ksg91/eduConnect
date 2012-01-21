@@ -1,0 +1,21 @@
+html, body 
+{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body
+{
+  background-color:#eeeeee;
+}
+#loginlogo
+{
+  background: url("head-back.png") repeat-x;
+  width:100%;
+  min-height:60px;
+  padding:20px;
+}
+#navheader 
+{
+  
+}
