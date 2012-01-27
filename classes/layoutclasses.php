@@ -1,7 +1,7 @@
 <?php
 class HtmlHeads
 {
-  var $title;
+  var $title,$header;
   function __construct($title="eduConnect")
   {
     $this->title=$title;
@@ -12,8 +12,24 @@ class HtmlHeads
     echo '<html xmlns="http://www.w3.org/1999/xhtml">';
     echo "<head>";
     echo "<title>".$this->title."</title>";
-    echo "<link rel=\"stylesheet\" href=\"style/main.css\" />";
+    echo "<link rel=\"stylesheet\" href=\"resource/main.css\" />";
     echo "</head>";
+  }
+  function setTitle($title)
+  {
+    $this->title=$title;
+  }
+  function addToHeader($header)
+  {
+    $this->header=($this->header).($header);
+  }
+  function putFooter()
+  {
+    
+    echo "<div id=\"footer\">";
+    echo "<h3 style=\"color: #CCCCCC;text-align:center;\">&copy; eduConnect Team</span>";
+    echo "</div>";
+    echo "</body>";
   }
 }
 ?>
