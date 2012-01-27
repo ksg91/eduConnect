@@ -38,6 +38,16 @@ body
     background-repeat: repeat-y repeat-x;
 
 }
+#loginsubmit
+{
+  background-color: #808080;
+  color: white;
+  border: 1px solid #505050;
+  padding: 2px 8px 2px 8px;
+  cursor: pointer;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
 input, textarea, select
 {
     border: 1px solid #999;
@@ -67,4 +77,10 @@ input[type="radio"], input[type="checkbox"]
 {
   height:80%;
   width: 100%;
+}
+li 
+{
+  list-style:none url('plus.png');
+  margin:2px;
+  font-size:20px;
 }
