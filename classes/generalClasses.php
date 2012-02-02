@@ -26,7 +26,7 @@ class Login {
       $_SESSION['email']=$this->email;
       $_SESSION['lastaction']=date();
       $_SESSION['sess_id']=session_id();
-      $q=mysql_query("INSERT INTO sessions SET sess_id='".$_SESSION['sess_id']."'");
+      $_SESSION['id']=getUidByEmail($this->email);
       return true;
     }
     else 
@@ -37,5 +37,12 @@ class Login {
     setcookie("email",$this->email,time()+604800);
     setcookie("pw",$this->pw,time()+604800);
   }
+}
+class UtilityFunctions
+{
+  public static getUidByEmail($email)
+  {
+    return mysql_result(mysql_query("SELECT id FROM users WHERE email='".$email."'"),0);    
+  } 
 }
 ?>
