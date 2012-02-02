@@ -6,7 +6,9 @@ html, body
 }
 body
 {
-  background-color:#DDDDDD;
+  //background-color:#DDDDDD;
+  background-image: url("bg.png");
+  background-repeat: repeat-x repeat-y;
 }
 #loginlogo
 {
