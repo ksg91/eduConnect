@@ -32,4 +32,30 @@ class HtmlHeads
     echo "</body>";
   }
 }
+class LayoutStruct
+{
+  var $left,$right;
+  function __construct($left,$right)
+  {
+    $this->left=$left;
+    $this->right=$right;
+  }
+  function putFrame()
+  {
+    echo "<body>";
+    echo "<div id=\"head-nav-container\">";
+    echo "<div id=\"head-nav\">";
+    echo "<img src=\"".ABS_PATH."/resource/logo.png\" alt=\"logo\">";
+    echo "</div>";
+    echo "</div>";
+    echo "<div id=\"content-area\">";
+    echo "<div id=\"content-left\">";
+    echo $this->left;
+    echo "</div>";
+    echo "<div id=\"content-right\">";
+    echo $this->right;
+    echo "</div>";
+    echo "</div>";
+  }
+}
 ?>

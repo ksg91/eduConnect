@@ -190,6 +190,7 @@ eduConnect
 		login.php
 		README.md
 		SRS.pdf
+		index.php
 [Open project files]
 0=login.php
 1=classes\constants.php
@@ -198,12 +199,13 @@ eduConnect
 4=classes\includes.php
 5=classes\layoutclasses.php
 6=resource\main.css
+7=index.php
 [Selected Project Files]
 Main=
-Selected=classes\constants.php
+Selected=resource\main.css
 [login.php]
 TopLine=1
-Caret=82,15
+Caret=28,7
 [classes\constants.php]
 TopLine=1
 Caret=1,1
@@ -211,14 +213,17 @@ Caret=1,1
 TopLine=1
 Caret=1,1
 [classes\generalClasses.php]
-TopLine=5
-Caret=30,29
+TopLine=22
+Caret=40,54
 [classes\includes.php]
 TopLine=1
 Caret=1,1
 [classes\layoutclasses.php]
-TopLine=1
-Caret=1,1
+TopLine=18
+Caret=16,57
 [resource\main.css]
+TopLine=103
+Caret=3,139
+[index.php]
 TopLine=1
-Caret=22,11
+Caret=55,5
