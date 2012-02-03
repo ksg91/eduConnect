@@ -8,7 +8,7 @@ echo "<table width=\"100%;\" > <tr>";
 echo "<td style=\"margin:4px;width:73%;\"><img src=\"".ABS_PATH."/resource/logo.png\" alt=\"eduConnect Logo\" /></td><td width=\"20%\">";
 echo "<table width=\"100%\" id=\"loginform\"><tr><td>Email:</td><td>Password:</td></tr>";
 echo "<tr>";
-echo "<form action=\"".ABS_PATH."/doLogin.php\" method=\"post\">";
+echo "<form action=\"".ABS_PATH."/doLogin.php".(isset($_GET['redTo'])?"?redTo=".$_GET['redTo']:"")."\" method=\"post\">";
 echo "<td><input type=\"text\" name=\"email\" /></td>";
 echo "<td><input type=\"password\" name=\"pw\" /></td>";
 echo "</tr>";

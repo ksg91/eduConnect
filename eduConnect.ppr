@@ -13,7 +13,7 @@ ProjectFilesOnly=0
 [Project tree]
 eduConnect
 	+eduConnect
-		-.git
+		+.git
 			-hooks
 				.git\hooks\applypatch-msg.sample
 				.git\hooks\commit-msg.sample
@@ -174,13 +174,13 @@ eduConnect
 			.git\HEAD
 			.git\index
 			.git\packed-refs
-		-classes
+		+classes
 			classes\constants.php
 			classes\database.php
 			classes\generalClasses.php
 			classes\includes.php
 			classes\layoutclasses.php
-		-resource
+		+resource
 			resource\foot-bg.png
 			resource\head-back.png
 			resource\logo.png
@@ -191,5 +191,34 @@ eduConnect
 		README.md
 		SRS.pdf
 [Open project files]
+0=login.php
+1=classes\constants.php
+2=classes\database.php
+3=classes\generalClasses.php
+4=classes\includes.php
+5=classes\layoutclasses.php
+6=resource\main.css
 [Selected Project Files]
 Main=
+Selected=classes\constants.php
+[login.php]
+TopLine=1
+Caret=82,15
+[classes\constants.php]
+TopLine=1
+Caret=1,1
+[classes\database.php]
+TopLine=1
+Caret=1,1
+[classes\generalClasses.php]
+TopLine=5
+Caret=30,29
+[classes\includes.php]
+TopLine=1
+Caret=1,1
+[classes\layoutclasses.php]
+TopLine=1
+Caret=1,1
+[resource\main.css]
+TopLine=1
+Caret=22,11
