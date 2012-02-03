@@ -51,7 +51,7 @@ class UtilClass
       if(isset($_COOKIE['email']&&isset($_COOKIE['pw'])))
         header("Location:".ABS_PATH."/autoLogin.php?redTo=".urlencode($redTo));
       else
-        header("Location: ".ABS_PATH."login.php?redTo=".urlencode($redTo));
+        header("Location: ".ABS_PATH."/login.php?redTo=".urlencode($redTo));
     }
   }
   public static isLoggedIn()
