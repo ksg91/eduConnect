@@ -34,11 +34,11 @@ class HtmlHeads
 }
 class LayoutStruct
 {
-  var $left,$right;
-  function __construct($left,$right)
+  var $content,$widget,$count;
+  function __construct($content)
   {
-    $this->left=$left;
-    $this->right=$right;
+    $this->content=$content;
+    $this->count=0;
   }
   function putFrame()
   {
@@ -50,12 +50,28 @@ class LayoutStruct
     echo "</div>";
     echo "<div id=\"content-area\">";
     echo "<div id=\"content-left\">";
-    echo $this->left;
+    echo $this->putContent();
     echo "</div>";
     echo "<div id=\"content-right\">";
-    echo $this->right;
+    echo $this->putWidgets();
     echo "</div>";
     echo "</div>";
+  }
+  function addWidget($code)
+  {
+    $this->widget[$this->count]="<div class=\"widget\" id=\"wid-".($this->count)."\">";
+    $this->widget[$this->count].=$code;
+    $this->widget[$this->count].="</div>";
+    $this->count++;
+  }
+  function putWidgets()
+  {
+    for($i=0;$i<$this->count;$i++)
+      echo $this->widget[$i];
+  }
+  function putContent()
+  {
+    echo $this->content;
   }
 }
 ?>
