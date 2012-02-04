@@ -159,3 +159,51 @@ li
   border-radius: 5px;
   padding:3px;
 }
+.talk
+{
+  margin:4px;
+  background-image: url("foot-bg.png");
+  background-repeat: repeat-x repeat-y;
+  color: #DDDDDD;
+  min-height: 50px;
+  z-index:102;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  padding:3px;
+  min-height:110px;
+}
+.talk a
+{
+  color:#BBBBBB;
+}
+.talk .time
+{
+  font-size: small;
+  text-align:right;
+  //float:right;
+}
+.talk .proPic
+{
+  border:1px solid #808080;
+  text-align:left;
+  height:100px;
+  width:100px;
+  float:left;
+}
+.talk .name
+{
+  font-size:medium;
+  text-align:left;
+  position:relative;
+}
+.talk .container
+{
+  margin:2px;
+  background-color: #DDDDDD;
+  color: #202020;
+  //min-height: 50px;
+  z-index:104;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  padding:3px;
+}

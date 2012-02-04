@@ -180,6 +180,8 @@ eduConnect
 			classes\generalClasses.php
 			classes\includes.php
 			classes\layoutclasses.php
+			classes\talks.php
+			classes\users.php
 		+resource
 			resource\foot-bg.png
 			resource\head-back.png
@@ -200,12 +202,15 @@ eduConnect
 5=classes\layoutclasses.php
 6=resource\main.css
 7=index.php
+8=classes\talks.php
+9=classes\users.php
+10=test.php
 [Selected Project Files]
 Main=
-Selected=resource\main.css
+Selected=classes\talks.php
 [login.php]
 TopLine=1
-Caret=28,7
+Caret=37,20
 [classes\constants.php]
 TopLine=1
 Caret=1,1
@@ -217,13 +222,22 @@ TopLine=22
 Caret=40,54
 [classes\includes.php]
 TopLine=1
-Caret=1,1
+Caret=16,9
 [classes\layoutclasses.php]
-TopLine=18
-Caret=16,57
+TopLine=34
+Caret=24,74
 [resource\main.css]
-TopLine=103
-Caret=3,139
+TopLine=167
+Caret=5,183
 [index.php]
 TopLine=1
-Caret=55,5
+Caret=17,5
+[classes\talks.php]
+TopLine=6
+Caret=46,42
+[classes\users.php]
+TopLine=1
+Caret=81,8
+[test.php]
+TopLine=1
+Caret=17,2
