@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 28, 2012 at 06:49 AM
+-- Generation Time: Feb 12, 2012 at 03:09 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -111,21 +111,6 @@ CREATE TABLE IF NOT EXISTS `principal` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sessions`
---
-
-CREATE TABLE IF NOT EXISTS `sessions` (
-  `id` int(4) NOT NULL AUTO_INCREMENT,
-  `sess_id` varchar(100) NOT NULL,
-  `u_id` int(9) NOT NULL,
-  `lastaction` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `sess_id` (`sess_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `student`
 --
 
@@ -143,14 +128,24 @@ CREATE TABLE IF NOT EXISTS `student` (
 --
 
 CREATE TABLE IF NOT EXISTS `talks` (
-  `id` int(9) NOT NULL,
-  `content` varchar(1000) NOT NULL,
-  `date` date NOT NULL,
+  `id` int(9) NOT NULL AUTO_INCREMENT,
+  `content` varchar(2000) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `by` int(9) NOT NULL,
   `ups` int(4) NOT NULL DEFAULT '0',
   `downs` int(4) NOT NULL DEFAULT '0',
-  `post` varchar(2000) NOT NULL,
-  `scope` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `scope` int(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `talks`
+--
+
+INSERT INTO `talks` (`id`, `content`, `date`, `by`, `ups`, `downs`, `scope`) VALUES
+(1, 'This is a demo Talk', '2012-02-23 04:58:27', 1, 0, 0, 1),
+(2, 'Another Talk', '2012-02-12 14:57:15', 1, 2, 3, 0),
+(3, 'Third Talk', '2012-02-12 14:57:15', 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -171,6 +166,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `gender` binary(1) NOT NULL,
   `about_me` varchar(300) NOT NULL,
   `college_id` int(2) NOT NULL,
+  `lastseen` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `perm`, `address`, `dob`, `pass`, `ph_no`, `profile_pic`, `gender`, `about_me`, `college_id`, `lastseen`) VALUES
+(1, 'Kishan Gor', 'ego@ksg91.com', 1, '', '0000-00-00', '098f6bcd4621d373cade4e832627b4f6', '', '', '', '', 0, '2012-02-04 09:27:26');
