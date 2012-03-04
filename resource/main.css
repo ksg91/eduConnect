@@ -54,10 +54,6 @@ input, textarea, select
 {
     border: 1px solid #999;
 }
-textarea
-{
-    height: 110px;
-}
 input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus
 {
     background-color: #ffffe0;
@@ -67,9 +63,22 @@ input[type="text"], input[type="password"], textarea, select
     -webkit-border-radius: 3px;
     border-radius: 3px;
 }
+textarea
+{
+  height:90px;
+  width:98%;
+  background-color:#DEDEDE;
+}
 input[type="submit"], input[type="button"]
 {
     -webkit-appearance: none;
+    background-color: #808080;
+    color: white;
+    border: 1px solid #505050;
+    padding: 2px 8px 2px 8px;
+    cursor: pointer;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
 }
 input[type="radio"], input[type="checkbox"]
 {
@@ -111,10 +120,14 @@ li
 {
   width:1030px;
   min-height: 100%;
-  position: relative;
+  background-image: url("logo.png");
+  background-repeat: no-repeat;
+  background-position:center;
   margin:auto;
+  padding:auto;
   clear:both;
-  text-align:center;
+  text-align:left;
+  font-weight:bold;
 }
 #content-left
 {
@@ -206,4 +219,17 @@ li
   -webkit-border-radius: 2px;
   border-radius: 2px;
   padding:3px;
+}
+#proWid
+{
+  margin: 4px;
+  text-align: center;
+}
+#proWid a
+{
+  color: #505050;
+}
+a
+{
+  color:#BBBBBB;
 }

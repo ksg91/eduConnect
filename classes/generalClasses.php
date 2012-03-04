@@ -4,24 +4,26 @@ class Login {
   var $remember;
   function __construct($email,$pw,$remember)
   {
-    $this->email=mysql_real_string_escape($email);
+    $this->email=$email;
     $this->pw=$pw;
     $this->remember=$remember;
   }
   function isValidLogin()
   {
-    $rpw=mysql_result(mysql_query("SELECT pass FROM `users` WHERE `email`='".$this->email."'");
-    if($rpw==$pw)
+    $rpw=mysql_result(mysql_query("SELECT pass FROM `users` WHERE `email`='".$this->email."'"),0);
+    if($rpw==$this->pw)
       return true;
-    else 
+    else {
+      echo "PASSWORD KHOTO CHE";
       return false;
+    }
   }
   function doLogin()
   {
-    if(this->isValidLogin())
+    if($this->isValidLogin())
     {
       if($this->remember)
-        setLoginCookies();
+        $this->setLoginCookies();
       $_SESSION['loggedIn']=true;
       $_SESSION['email']=$this->email;
       $_SESSION['lastaction']=date();
@@ -40,21 +42,21 @@ class Login {
 }
 class UtilClass
 {
-  public static getUidByEmail($email)
+  public static function getUidByEmail($email)
   {
     return mysql_result(mysql_query("SELECT id FROM users WHERE email='".$email."'"),0);    
   } 
-  public static requireLogin($redTo)
+  public static function requireLogin($redTo)
   {
-    if(!UtilFunctions::isLoggedIn())
+    if(!(UtilClass::isLoggedIn()))
     {
-      if(isset($_COOKIE['email']&&isset($_COOKIE['pw'])))
+      if(isset($_COOKIE['email']) && isset($_COOKIE['pw']))
         header("Location:".ABS_PATH."/autoLogin.php?redTo=".urlencode($redTo));
       else
         header("Location: ".ABS_PATH."/login.php?redTo=".urlencode($redTo));
     }
   }
-  public static isLoggedIn()
+  public static function isLoggedIn()
   {
     if($_SESSION['loggedIn'])
       return true;

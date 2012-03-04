@@ -18,5 +18,23 @@ class User
     $this->colID=$row['college_id'];
     $this->lastseen=$row['lastseen'];
   }
+  function addTalk($talk)
+  {
+    if($talk=="")
+      return NULL;
+    if(strlen($talk)>2000)
+      return "LIMIT_EXCEED";
+    $q=mysql_query("INSERT INTO talks SET content='".$talk."',`by`=".$this->id.",`date`=CURRENT_TIMESTAMP,scope=0");
+    if(!$q)
+      return "MYSQL_ERROR";
+    return true;
+  }
+  function getProfileWidget()
+  {
+    $widget="<div id=\"proWid\"><img src=\"".ABS_PATH."/".$this->proPic."\" /><br />";
+    $widget.="<h3><a href=\"".ABS_PATH."/users.php?id=".$this->id."\">".$this->name."</a></h3>";
+    $widget.="</div>";
+    return $widget;
+  }
 }
 ?>

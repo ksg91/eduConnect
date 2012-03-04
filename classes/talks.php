@@ -33,7 +33,7 @@ class Talk
   {
     $pt=strtotime($this->date);
     $diff=time()-$pt;
-    //echo $diff;
+    $diff;
     if($diff<(24*60*60))
     {
       if($diff<(60*60))
@@ -65,6 +65,18 @@ class Talks
       $this->talks[$i]=new Talk($talk[0]);
       $i++;    	
     }    
+  }
+  function getTalkUpdateForm()
+  {
+    $form="<div class=\"talk\"><div class=\"container\">";
+    $form.="<b>Update Status</b></div>";
+    $form.="<div class=\"container\">";
+    $form.="<form action=\"".ABS_PATH."/updateTalk.php\" method=\"post\">";
+    $form.="<textarea name=\"content\"></textarea>";
+    $form.="</div><div class=\"container\" style=\"text-align:right;\">";
+    $form.="<input type=\"submit\" value=\"Talk!\" />";
+    $form.="</div></div>";
+    return $form;
   }
   function getFormattedTalks()
   {
