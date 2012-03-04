@@ -174,7 +174,7 @@ eduConnect
 			.git\HEAD
 			.git\index
 			.git\packed-refs
-		+classes
+		-classes
 			classes\constants.php
 			classes\database.php
 			classes\generalClasses.php
@@ -182,7 +182,7 @@ eduConnect
 			classes\layoutclasses.php
 			classes\talks.php
 			classes\users.php
-		+resource
+		-resource
 			resource\foot-bg.png
 			resource\head-back.png
 			resource\logo.png
@@ -193,6 +193,8 @@ eduConnect
 		README.md
 		SRS.pdf
 		index.php
+		updateTalk.php
+		doLogin.php
 [Open project files]
 0=login.php
 1=classes\constants.php
@@ -204,13 +206,16 @@ eduConnect
 7=index.php
 8=classes\talks.php
 9=classes\users.php
-10=test.php
+10=latestdump.sql
+11=updateTalk.php
+12=doLogin.php
+13=autoLogin.php
 [Selected Project Files]
 Main=
-Selected=classes\talks.php
+Selected=classes\users.php
 [login.php]
 TopLine=1
-Caret=37,20
+Caret=14,14
 [classes\constants.php]
 TopLine=1
 Caret=1,1
@@ -218,26 +223,35 @@ Caret=1,1
 TopLine=1
 Caret=1,1
 [classes\generalClasses.php]
-TopLine=22
-Caret=40,54
+TopLine=4
+Caret=11,16
 [classes\includes.php]
 TopLine=1
-Caret=16,9
+Caret=28,8
 [classes\layoutclasses.php]
 TopLine=34
 Caret=24,74
 [resource\main.css]
-TopLine=167
-Caret=5,183
+TopLine=176
+Caret=1,219
 [index.php]
 TopLine=1
-Caret=17,5
+Caret=1,13
 [classes\talks.php]
-TopLine=6
-Caret=46,42
+TopLine=14
+Caret=38,19
 [classes\users.php]
 TopLine=1
-Caret=81,8
-[test.php]
+Caret=21,34
+[latestdump.sql]
+TopLine=137
+Caret=1,180
+[updateTalk.php]
 TopLine=1
-Caret=17,2
+Caret=1,3
+[doLogin.php]
+TopLine=1
+Caret=2,11
+[autoLogin.php]
+TopLine=1
+Caret=2,7
