@@ -13,7 +13,7 @@ ProjectFilesOnly=0
 [Project tree]
 eduConnect
 	+eduConnect
-		+.git
+		-.git
 			-hooks
 				.git\hooks\applypatch-msg.sample
 				.git\hooks\commit-msg.sample
@@ -174,7 +174,7 @@ eduConnect
 			.git\HEAD
 			.git\index
 			.git\packed-refs
-		-classes
+		+classes
 			classes\constants.php
 			classes\database.php
 			classes\generalClasses.php
@@ -182,7 +182,7 @@ eduConnect
 			classes\layoutclasses.php
 			classes\talks.php
 			classes\users.php
-		-resource
+		+resource
 			resource\foot-bg.png
 			resource\head-back.png
 			resource\logo.png
@@ -210,9 +210,11 @@ eduConnect
 11=updateTalk.php
 12=doLogin.php
 13=autoLogin.php
+14=pms.php
+15=classes\pmclasses.php
 [Selected Project Files]
 Main=
-Selected=classes\users.php
+Selected=classes\pmclasses.php
 [login.php]
 TopLine=1
 Caret=14,14
@@ -227,22 +229,22 @@ TopLine=4
 Caret=11,16
 [classes\includes.php]
 TopLine=1
-Caret=28,8
+Caret=13,9
 [classes\layoutclasses.php]
-TopLine=34
-Caret=24,74
+TopLine=36
+Caret=15,52
 [resource\main.css]
-TopLine=176
-Caret=1,219
+TopLine=91
+Caret=17,134
 [index.php]
 TopLine=1
-Caret=1,13
+Caret=3,17
 [classes\talks.php]
-TopLine=14
-Caret=38,19
+TopLine=52
+Caret=4,93
 [classes\users.php]
-TopLine=1
-Caret=21,34
+TopLine=7
+Caret=20,48
 [latestdump.sql]
 TopLine=137
 Caret=1,180
@@ -255,3 +257,9 @@ Caret=2,11
 [autoLogin.php]
 TopLine=1
 Caret=2,7
+[pms.php]
+TopLine=1
+Caret=1,11
+[classes\pmclasses.php]
+TopLine=34
+Caret=39,72

@@ -4,13 +4,18 @@ UtilClass::requireLogin(ABS_PATH."/index.php");
 $html=new HtmlHeads();
 $user=new User($_SESSION['id']);
 $html->putHead();
-$talks=new Talks("","",0);
-$content=$talks->getTalkUpdateForm();
-$content.=$talks->getFormattedTalks();
+if(isset($_GET['action']))
+{
+  echo "test";
+  if($_GET['action']=="send")
+  {
+    if($user->sendPM($_GET['to'],$_POST['content']))
+      $content="<div class=\"talks container\">PM sent successfully.</div>";
+      echo mysql_error();
+  }
+}
+$content.=PMs::getSendPMForm($_GET['to']);
 $layout=new LayoutStruct($content);
-//$talk=new Talk(1);
-//$layout=new LayoutStruct($talk->getFormattedTalk());
-
 $layout->addWidget($user->getProfileWidget());
 $layout->addWidget($user->getStatusPaneWidget());
 $layout->putFrame();

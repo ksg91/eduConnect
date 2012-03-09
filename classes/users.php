@@ -36,5 +36,26 @@ class User
     $widget.="</div>";
     return $widget;
   }
+  function getStatusPaneWidget()
+  {
+    $widget='<div>';
+    $widget.='<ul style="list-style:none;">';
+    $widget.='<li><a href="pms.php">Private Messages(2)</a></li>';
+    $widget.='<li><a href="friends.php">Friends(3)</a></li>';
+    $widget.='<li><a href="pms.php">Notification(1)</a></li>';
+    $widget.='</ul>';
+    $widget.='</div>';
+    return $widget;
+  }
+  function sendPM($to,$content)
+  {
+    if($content=="NULL")
+      return NULL;
+    $q=mysql_query("INSERT INTO pms SET content='".$content."',`by`=".$this->id.",`date`=CURRENT_TIMESTAMP,`to`=".$to);
+    if(!$q)
+      return "MYSQL_ERROR";
+    return true;
+    
+  }
 }
 ?>

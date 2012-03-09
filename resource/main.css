@@ -129,6 +129,10 @@ li
   text-align:left;
   font-weight:bold;
 }
+#head-nav a
+{
+  color:#BBBBBB;
+}
 #content-left
 {
   width: 65%;
@@ -187,7 +191,7 @@ li
 }
 .talk a
 {
-  color:#BBBBBB;
+  color:#505050;
 }
 .talk .time
 {
@@ -208,6 +212,7 @@ li
   font-size:medium;
   text-align:left;
   position:relative;
+  font-weight:bold;
 }
 .talk .container
 {
@@ -231,5 +236,5 @@ li
 }
 a
 {
-  color:#BBBBBB;
+  color:#505050;
 }
