@@ -1,19 +1,17 @@
 <?php
-class Talk
+class PM
 {
-  var $id,$content,$date,$by,$ups,$downs,$scope,$comments=0;
+  var $id,$content,$date,$by,$to;
   function __construct($id)
   {
     $this->id=$id;
-    $row=mysql_fetch_array(mysql_query("SELECT * FROM talks WHERE id=".$id));
+    $row=mysql_fetch_array(mysql_query("SELECT * FROM pms WHERE id=".$id));
     $this->content=$row['content'];
     $this->date=$row['date'];
     $this->by=new User($row['by']);
-    $this->ups=$row['ups'];
-    $this->downs=$row['downs'];
-    $this->scope=$row['scope'];
+    $this->to=new User($row['to']);
   }
-  function getFormattedTalk()
+  function getFormattedPM()
   {
     $talk='<div class="talk">';
     $talk.='<div class="container">';
@@ -27,9 +25,7 @@ class Talk
     $talk.=$this->content;
     $talk.='</div>';
     $talk.='<div class="container" style="text-align:right">';
-    $talk.='<a href="comments.php?id='.$this->id.'">Comments ('.$this->comments.')</a>';
-    $talk.=' | <a href="comments.php?id='.$this->id.'">Ups ('.$this->ups.')</a>';
-    $talk.=' | <a href="comments.php?id='.$this->id.'">Downs ('.$this->downs.')</a>';
+    $talk.='<a href="sendPM.php?to='.$this->by->id.'">Reply</a>';
     $talk.='</div>';
     $talk.='</div>';
     return $talk;
@@ -52,44 +48,43 @@ class Talk
     return $this->date;
   }
 }
-class Talks
+class PMs
 {
-  var $talks,$user,$scope,$from;
-  function __construct($user,$scope,$from)
+  var $pms,$from,$to;
+  function __construct($to,$from)
   {
-    $this->user=$user;
-    $this->scope=$scope;
-    $this->from=$from;
     $this->loadTalks();
+    echo mysql_error();
   }
   function loadTalks()
   {
-    $talk_id=mysql_query("SELECT id FROM talks ORDER BY `date` DESC LIMIT ".$this->from.",20");
+    $pm_id=mysql_query("SELECT id FROM pms WHERE `to`=1 ORDER BY `date` DESC ");
     $i=0;
-    while (($talk=mysql_fetch_array($talk_id))) {
-      $this->talks[$i]=new Talk($talk[0]);
+    while (($pm=mysql_fetch_array($pm_id))) {
+      $this->pms[$i]=new PM($pm[0]);
       $i++;    	
     }    
   }
-  function getTalkUpdateForm()
+  function getFormattedPMs()
   {
+    $content="";
+    foreach($this->pms as $value){
+      $content.=$value->getFormattedPM();
+    }
+    return $content;
+  }
+  static function getSendPMForm($to)
+  {
+    $user=new User($to);
     $form="<div class=\"talk\"><div class=\"container\">";
-    $form.="<b>Let's Talk</b></div>";
+    $form.="<b>Send PM to ".($user->name)."</b></div>";
     $form.="<div class=\"container\">";
-    $form.="<form action=\"".ABS_PATH."/updateTalk.php\" method=\"post\">";
+    $form.="<form action=\"".ABS_PATH."/sendPM.php?to=".$to."&amp;action=send\" method=\"post\">";
     $form.="<textarea name=\"content\"></textarea>";
     $form.="</div><div class=\"container\" style=\"text-align:right;\">";
-    $form.="<input type=\"submit\" value=\"Talk!\" />";
+    $form.="<input type=\"submit\" value=\"Send PM!\" />";
     $form.="</div></div>";
     return $form;
-  }
-  function getFormattedTalks()
-  {
-    $talks="";
-    foreach($this->talks as $value){
-      $talks.=$value->getFormattedTalk();
-    }
-    return $talks;
   }
 }
 ?>
