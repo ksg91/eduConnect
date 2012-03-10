@@ -40,9 +40,19 @@ class User
   {
     $widget='<div>';
     $widget.='<ul style="list-style:none;">';
-    $widget.='<li><a href="pms.php">Private Messages(2)</a></li>';
+    $widget.='<li><a href="pms.php">Private Messages('.$this->getUnreadPMCount().'/'.$this->getTotalPMCount().')</a></li>';
     $widget.='<li><a href="friends.php">Friends(3)</a></li>';
     $widget.='<li><a href="pms.php">Notification(1)</a></li>';
+    $widget.='</ul>';
+    $widget.='</div>';
+    return $widget;
+  }
+  function getActionWidget()
+  {
+    $widget='<div>';
+    $widget.='<ul style="list-style:none;">';
+    $widget.='<li><a href="sendPM.php?to='.$this->id.'">Send PM</a></li>';
+    $widget.='<li><a href="addFriend.php">Add As A Friend</a></li>';
     $widget.='</ul>';
     $widget.='</div>';
     return $widget;
@@ -54,8 +64,16 @@ class User
     $q=mysql_query("INSERT INTO pms SET content='".$content."',`by`=".$this->id.",`date`=CURRENT_TIMESTAMP,`to`=".$to);
     if(!$q)
       return "MYSQL_ERROR";
-    return true;
-    
+    return true; 
+  }
+  function getTotalPMCount()
+  {
+    $c=mysql_result(mysql_query("SELECT COUNT(*) FROM pms WHERE `to`=".$this->id),0);
+    return $c;
+  }
+  function getUnreadPMCount()
+  {
+    return mysql_result(mysql_query("SELECT COUNT(*) FROM pms WHERE `read`=0 AND `to`=".$this->id),0);
   }
 }
 ?>

@@ -212,6 +212,7 @@ eduConnect
 13=autoLogin.php
 14=pms.php
 15=classes\pmclasses.php
+16=sendPM.php
 [Selected Project Files]
 Main=
 Selected=classes\pmclasses.php
@@ -241,10 +242,10 @@ TopLine=1
 Caret=3,17
 [classes\talks.php]
 TopLine=52
-Caret=4,93
+Caret=3,74
 [classes\users.php]
-TopLine=7
-Caret=20,48
+TopLine=18
+Caret=112,54
 [latestdump.sql]
 TopLine=137
 Caret=1,180
@@ -259,7 +260,10 @@ TopLine=1
 Caret=2,7
 [pms.php]
 TopLine=1
-Caret=1,11
+Caret=3,13
 [classes\pmclasses.php]
-TopLine=34
-Caret=39,72
+TopLine=1
+Caret=4,55
+[sendPM.php]
+TopLine=1
+Caret=36,13
