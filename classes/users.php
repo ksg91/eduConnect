@@ -32,7 +32,7 @@ class User
   function getProfileWidget()
   {
     $widget="<div id=\"proWid\"><img src=\"".ABS_PATH."/".$this->proPic."\" /><br />";
-    $widget.="<h3><a href=\"".ABS_PATH."/users.php?id=".$this->id."\">".$this->name."</a></h3>";
+    $widget.="<h3><a href=\"".ABS_PATH."/profile.php?id=".$this->id."\">".$this->name."</a></h3>";
     $widget.="</div>";
     return $widget;
   }
