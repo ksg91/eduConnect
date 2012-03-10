@@ -1,7 +1,7 @@
 <?php
 class PM
 {
-  var $id,$content,$date,$by,$to;
+  var $id,$content,$date,$by,$to,$read;
   function __construct($id)
   {
     $this->id=$id;
@@ -10,6 +10,8 @@ class PM
     $this->date=$row['date'];
     $this->by=new User($row['by']);
     $this->to=new User($row['to']);
+    $this->read=$row['read'];
+    $this->markRead();
   }
   function getFormattedPM()
   {
@@ -28,6 +30,8 @@ class PM
     $talk.='<a href="sendPM.php?to='.$this->by->id.'">Reply</a>';
     $talk.='</div>';
     $talk.='</div>';
+    if(!$this->read)
+      $talk="<b>".$talk."</b>";
     return $talk;
   }
   function getTime()
@@ -46,6 +50,11 @@ class PM
       return Date("G",time()-$pt)." hours ago";
     }
     return $this->date;
+  }
+  function markRead()
+  {
+    if($this->read==0)
+      mysql_query("UPDATE pms SET `read`=1 WHERE id=".$this->id);
   }
 }
 class PMs

@@ -54,22 +54,36 @@ class Talk
 }
 class Talks
 {
-  var $talks,$user,$scope,$from;
-  function __construct($user,$scope,$from)
+  var $talks,$user,$scope,$from,$target;
+  function __construct($user,$scope,$from,$target=NULL)
   {
     $this->user=$user;
     $this->scope=$scope;
     $this->from=$from;
+    $this->target=$target;
     $this->loadTalks();
   }
   function loadTalks()
   {
-    $talk_id=mysql_query("SELECT id FROM talks ORDER BY `date` DESC LIMIT ".$this->from.",20");
-    $i=0;
-    while (($talk=mysql_fetch_array($talk_id))) {
-      $this->talks[$i]=new Talk($talk[0]);
-      $i++;    	
-    }    
+    if($this->target==NULL)
+    {
+      $talk_id=mysql_query("SELECT id FROM talks ORDER BY `date` DESC LIMIT ".$this->from.",20");
+      $i=0;
+      while (($talk=mysql_fetch_array($talk_id))) {
+        $this->talks[$i]=new Talk($talk[0]);
+        $i++;    	
+      }
+    }  
+    else
+    {
+      $talk_id=mysql_query("SELECT id FROM talks WHERE `by`='".$this->target."' ORDER BY `date` DESC LIMIT ".$this->from.",20");
+      $i=0;
+      while (($talk=mysql_fetch_array($talk_id))) {
+        $this->talks[$i]=new Talk($talk[0]);
+        $i++;    	
+      }
+    }  
+    //echo mysql_error();
   }
   function getTalkUpdateForm()
   {
