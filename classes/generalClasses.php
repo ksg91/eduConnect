@@ -14,7 +14,6 @@ class Login {
     if($rpw==$this->pw)
       return true;
     else {
-      echo "PASSWORD KHOTO CHE";
       return false;
     }
   }
