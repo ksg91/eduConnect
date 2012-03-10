@@ -18,9 +18,10 @@ class Talk
     $talk='<div class="talk">';
     $talk.='<div class="container">';
     $talk.='<div class="proPic">';
+    $talk.='<a href="'.ABS_PATH.'/profile.php?id='.$this->by->id.'">';
     $talk.='<img src="'.ABS_PATH.'/'.$this->by->proPic.'" alt="profile pic" />';
     $talk.='</div>';
-    $talk.='<div class="name">'.$this->by->name.'</div>';
+    $talk.='<div class="name">'.$this->by->name.'</div></a>';
     $talk.='<div class="time">'.$this->getTime().'</div>';
     $talk.='</div>';
     $talk.='<div class="container">';
