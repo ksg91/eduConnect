@@ -6,12 +6,10 @@ $user=new User($_SESSION['id']);
 $html->putHead();
 if(isset($_GET['action']))
 {
-  echo "test";
   if($_GET['action']=="send")
   {
     if($user->sendPM($_GET['to'],$_POST['content']))
       $content="<div class=\"talks container\">PM sent successfully.</div>";
-      echo mysql_error();
   }
 }
 $content.=PMs::getSendPMForm($_GET['to']);
