@@ -10,10 +10,22 @@ class Chat
   {
     $rooms=mysql_query("SELECT id FROM chatrooms");
     $i=0;
-    while($room==mysql_fetch_array($rooms)){
-      $this->chatrooms[$i]=new Chatroom($room);
+    while($room=mysql_fetch_array($rooms)){
+      $this->chatrooms[$i]=new Chatroom($room[0]);
       $i++;
     }
+  }
+  function getFormattedChatroomList()
+  {
+    $content="<div class=\"talk\">";
+    foreach($this->chatrooms as $value){
+      $content.="<div class=\"container\">";
+      $content.="<a href=\"chatroom.php?id=".$value->id."\">";
+      $content.=$value->name."(".$value->users.")";
+      $content.="</a></div>";
+    }
+    $content.="</div>";
+    return $content;
   }
 }
 class Chatroom
@@ -26,6 +38,7 @@ class Chatroom
     $this->name=$row['name'];
     $this->perm=$row['perm'];
     $this->users=$row['users'];
+    $this->loadChatPosts();
   }
   function getFormattedChatPosts()
   {
@@ -35,40 +48,57 @@ class Chatroom
     }
     return $content;
   }
+  function getChatPostForm()
+  {
+    $form="<div class=\"talk\"><div class=\"container\">";
+    $form.="<b>Let's Chat</b></div>";
+    $form.="<div class=\"container\">";
+    $form.="<form action=\"".ABS_PATH."/postChat.php?id=".$this->id."\" method=\"post\">";
+    $form.="<textarea name=\"content\"></textarea>";
+    $form.="</div><div class=\"container\" style=\"text-align:right;\">";
+    $form.="<input type=\"submit\" value=\"Chat!\" />";
+    $form.="</div></div>";
+    return $form;
+  }
   private function loadChatPosts()
   {
     if(!$this->chatposts==NULL)
       return ;
     $q=mysql_query("SELECT id FROM chatposts WHERE room_id=".$this->id." ORDER BY `time` LIMIT 0,30");
     $i=0;
-    while($post==mysql_fetch_array($q)){
-      $this->chatposts[$i]=new Chatroom($post);
+    while($post=mysql_fetch_array($q)){
+      $this->chatposts[$i]=new ChatPost($post[0]);
       $i++;
     }
   }
 }
 class ChatPost
 {
+  var $id,$by,$content,$time;
+  function __construct($id)
+  {
+    $this->id=$id;
+    $row=mysql_fetch_array(mysql_query("SELECT * FROM chatposts WHERE id=".$this->id));
+    $this->by=new User($row['by']);
+    $this->content=$row['content'];
+    $this->time=$row['time'];
+  }
   function getFormattedChatPost()
   {
-    $this->loadChatPosts();
-    $chats='<div class="talks">';
-    $chats.='<div class="container">';
-    $chats.='<div class="proPic">';
-    $chats.='<a href="'.ABS_PATH.'/profile.php?id='.$this->by->id.'">';
-    $chats.='<img src="'.ABS_PATH.'/'.$this->by->proPic.'" alt="profile pic" />';
-    $chats.='</div>';
-    $chats.='<div class="name">'.$this->by->name.'</div></a>';
-    $chats.='<div class="time">'.$this->getTime().'</div>';
-    $chats.='</div>';
-    $chats.='<div class="container">';
-    $chats.=$this->content;
-    $chats.='</div>';
-    $chats.='<div class="container" style="text-align:right">';
-    $chats.='<a href="sendPM.php?to='.$this->by->id.'">Reply</a>';
-    $chats.='</div>';
-    $chats.='</div>';
-    return $chats;
+    $talk='<div class="talk">';
+    $talk.='<div class="container">';
+    $talk.='<div class="proPic">';
+    $talk.='<a href="'.ABS_PATH.'/profile.php?id='.$this->by->id.'">';
+    $talk.='<img src="'.ABS_PATH.'/'.$this->by->proPic.'" alt="profile pic" />';
+    $talk.='</div>';
+    $talk.='<div class="name">'.$this->by->name.'</div></a>';
+    $talk.='<div class="time">'.$this->getTime().'</div>';
+    $talk.='</div>';
+    $talk.='<div class="container">';
+    $talk.=$this->content;
+    $talk.='</div>';
+    $talk.='</div>';
+    return $talk;
   }
   function getTime()
   {
