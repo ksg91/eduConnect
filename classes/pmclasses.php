@@ -63,12 +63,13 @@ class PMs
   var $pms,$from,$to;
   function __construct($to,$from)
   {
-    $this->loadTalks();
+    $this->to=$to;
+    $this->loadPMs();
     echo mysql_error();
   }
-  function loadTalks()
+  function loadPMs()
   {
-    $pm_id=mysql_query("SELECT id FROM pms WHERE `to`=1 ORDER BY `date` DESC ");
+    $pm_id=mysql_query("SELECT id FROM pms  WHERE `to`=".$this->to." ORDER BY `date` DESC ");
     $i=0;
     while (($pm=mysql_fetch_array($pm_id))) {
       $this->pms[$i]=new PM($pm[0]);
