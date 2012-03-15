@@ -31,8 +31,8 @@ class User
   }
   function getProfileWidget()
   {
-    $widget="<div id=\"proWid\"><img src=\"".ABS_PATH."/".$this->proPic."\" /><br />";
-    $widget.="<h3><a href=\"".ABS_PATH."/profile.php?id=".$this->id."\">".$this->name."</a></h3>";
+    $widget="<div id=\"proWid\"><a href=\"".ABS_PATH."/profile.php?id=".$this->id."\"><img src=\"".ABS_PATH."/".$this->proPic."\" /><br />";
+    $widget.="<h3>".$this->name."</h3></a>";
     $widget.="</div>";
     return $widget;
   }
