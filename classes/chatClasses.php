@@ -37,7 +37,7 @@ class Chatroom
     $row=mysql_fetch_array(mysql_query("SELECT * FROM chatrooms WHERE id=".$this->id));
     $this->name=$row['name'];
     $this->perm=$row['perm'];
-    $this->users=$row['users'];
+    $this->users=$this->getUsers();
     $this->loadChatPosts();
   }
   function getFormattedChatPosts()
@@ -64,12 +64,17 @@ class Chatroom
   {
     if(!$this->chatposts==NULL)
       return ;
-    $q=mysql_query("SELECT id FROM chatposts WHERE room_id=".$this->id." ORDER BY `time` LIMIT 0,30");
+    $q=mysql_query("SELECT id FROM chatposts WHERE room_id=".$this->id." ORDER BY `time` DESC LIMIT 0,30");
     $i=0;
     while($post=mysql_fetch_array($q)){
       $this->chatposts[$i]=new ChatPost($post[0]);
       $i++;
     }
+  }
+  private function getUsers()
+  {
+    $c=mysql_result(mysql_query("SELECT COUNT( DISTINCT `by`) FROM chatposts WHERE `time`+0>SYSDATE()-600 AND room_id=".$this->id),0);
+    return $c;
   }
 }
 class ChatPost
