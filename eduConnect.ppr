@@ -218,9 +218,8 @@ eduConnect
 15=classes\pmclasses.php
 16=sendPM.php
 17=profile.php
-18=logout.php
-19=classes\chatClasses.php
-20=chats.php
+18=classes\chatClasses.php
+19=chats.php
 [Selected Project Files]
 Main=
 Selected=classes\chatClasses.php
@@ -278,9 +277,6 @@ Caret=36,13
 [profile.php]
 TopLine=1
 Caret=1,2
-[logout.php]
-TopLine=1
-Caret=34,7
 [classes\chatClasses.php]
 TopLine=32
 Caret=41,68

@@ -29,6 +29,17 @@ class User
       return "MYSQL_ERROR";
     return true;
   }
+  function postToChat($chatpost,$roomID)
+  {
+    if($chatpost=="")
+      return NULL;
+    if(strlen($chatpost)>2000)
+      return "LIMIT_EXCEED";
+    $q=mysql_query("INSERT INTO chatposts SET content='".$chatpost."',`by`=".$this->id.",`time`=CURRENT_TIMESTAMP,room_id=".$roomID);
+    if(!$q)
+      return "MYSQL_ERROR";
+    return true;
+  }
   function getProfileWidget()
   {
     $widget="<div id=\"proWid\"><img src=\"".ABS_PATH."/".$this->proPic."\" /><br />";
