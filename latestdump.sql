@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 11, 2012 at 06:47 AM
+-- Generation Time: Apr 06, 2012 at 11:29 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -40,7 +40,21 @@ CREATE TABLE IF NOT EXISTS `chatposts` (
   `by` int(9) NOT NULL,
   `room_id` int(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `chatposts`
+--
+
+INSERT INTO `chatposts` (`id`, `content`, `time`, `by`, `room_id`) VALUES
+(1, 'ddfsfsd', '2012-04-05 10:29:51', 1, 1),
+(2, 'lol', '2012-04-05 10:31:48', 1, 1),
+(3, 'really?', '2012-04-05 10:32:01', 1, 1),
+(4, 'no', '2012-04-05 10:32:04', 1, 1),
+(5, 'whu?', '2012-04-05 10:32:08', 1, 1),
+(6, 'duh', '2012-04-04 10:32:12', 1, 1),
+(7, 'kfjg hdfkjh dfkghdfk dklh gkjd hgksdhdgkf', '2012-04-05 10:32:16', 1, 1),
+(8, 'lolll', '2012-04-05 11:07:35', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -132,6 +146,34 @@ CREATE TABLE IF NOT EXISTS `friends` (
   `user2` int(9) NOT NULL,
   `accepted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `perm_group`
+--
+
+CREATE TABLE IF NOT EXISTS `perm_group` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `type` int(1) NOT NULL DEFAULT '0',
+  `created_by` int(9) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `perm_member`
+--
+
+CREATE TABLE IF NOT EXISTS `perm_member` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `u_id` int(9) NOT NULL,
+  `accepted` tinyint(1) NOT NULL,
+  `mem_since` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
