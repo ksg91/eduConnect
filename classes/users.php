@@ -40,6 +40,16 @@ class User
       return "MYSQL_ERROR";
     return true;
   }
+  function getHisGroups()
+  {
+    $q=mysql_query("SELECT DISTINCT perm_id FROM perm_member WHERE u_id=".$this->id." ");
+    $i=0;
+    while($gid=mysql_fetch_array($q)){
+      $groups[$i]=new Group($gid[0]);
+      $i++;
+    }
+    return $groups;
+  }
   function getProfileWidget()
   {
     $widget="<div id=\"proWid\"><a href=\"".ABS_PATH."/profile.php?id=".$this->id."\"><img src=\"".ABS_PATH."/".$this->proPic."\" /><br />";
