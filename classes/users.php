@@ -5,7 +5,7 @@ class User
   function __construct($id)
   {
     $this->id=$id;
-    $row=mysql_fetch_array(mysql_query("SELECT * FROM users WHERE id=".$this->id));
+    $row=mysql_fetch_array(mysql_query("SELECT * FROM users WHERE id=".$id));
     $this->name=$row['name'];
     $this->email=$row['email'];
     $this->perm=$row['perm'];
@@ -39,6 +39,16 @@ class User
     if(!$q)
       return "MYSQL_ERROR";
     return true;
+  }
+  function getHisGroups()
+  {
+    $q=mysql_query("SELECT DISTINCT perm_id FROM perm_member WHERE u_id=".$this->id." ");
+    $i=0;
+    while($gid=mysql_fetch_array($q)){
+      $groups[$i]=new Group($gid[0]);
+      $i++;
+    }
+    return $groups;
   }
   function getProfileWidget()
   {

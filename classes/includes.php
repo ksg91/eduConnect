@@ -8,6 +8,7 @@ include("users.php");
 include("generalClasses.php");
 include("pmclasses.php");
 include("chatClasses.php");
+include("groups.php");
 $DB=new DatabaseCon();
 $DB->connect();
 ?>

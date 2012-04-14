@@ -1,17 +1,18 @@
 <?php
 class Talk
 {
-  var $id,$content,$date,$by,$ups,$downs,$scope,$comments=0;
+  var $id,$content,$date,$by,$ups,$downs,$scope,$comments;
   function __construct($id)
   {
     $this->id=$id;
-    $row=mysql_fetch_array(mysql_query("SELECT * FROM talks WHERE id=".$id));
+    $row=mysql_fetch_array(mysql_query("SELECT * FROM talks WHERE id=".$this->id));
     $this->content=$row['content'];
     $this->date=$row['date'];
     $this->by=new User($row['by']);
     $this->ups=$row['ups'];
     $this->downs=$row['downs'];
     $this->scope=$row['scope'];
+    $this->comments=$row['comments'];
   }
   function getFormattedTalk()
   {
@@ -64,11 +65,21 @@ class Talks
     $this->target=$target;
     $this->loadTalks();
   }
+  function getSuitableQuery()
+  {
+    $groups=$this->user->getHisGroups();
+    $perm="(0,";
+    foreach($groups as $value)
+      $perm.=$value->id.", ";
+    $perm.="".$this->user->colID.")";  
+    $query="SELECT id FROM talks WHERE scope=".$this->scope." AND scope IN ".$perm." ORDER BY `date` DESC LIMIT ".$this->from.",20";
+    return $query;
+  }
   function loadTalks()
   {
     if($this->target==NULL)
     {
-      $talk_id=mysql_query("SELECT id FROM talks ORDER BY `date` DESC LIMIT ".$this->from.",20");
+      $talk_id=mysql_query($this->getSuitableQuery());
       $i=0;
       while (($talk=mysql_fetch_array($talk_id))) {
         $this->talks[$i]=new Talk($talk[0]);
@@ -105,6 +116,17 @@ class Talks
       $talks.=$value->getFormattedTalk();
     }
     return $talks;
+  }
+  function getTalksScopeWidget()
+  {
+    $groups=$this->user->getHisGroups();
+    $widget='<div>';
+    $widget.='<ul style="list-style:none;">';
+    foreach($groups as $value)
+      $widget.='<li><a href="index.php?scope='.$value->id.'">'.$value->name.'</a></li>';
+    $widget.='</ul>';
+    $widget.='</div>';
+    return $widget;
   }
 }
 ?>

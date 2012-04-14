@@ -1,19 +1,30 @@
 <?php
 class Chat
 {
-  var $chatrooms;
-  function __construct()
+  var $chatrooms,$user;
+  function __construct($user)
   {
-    $this->loadChatrooms();
+    $this->user=$user;
+    $this->loadChatrooms();    
   }
   private function loadChatrooms()
   {
-    $rooms=mysql_query("SELECT id FROM chatrooms");
+    $rooms=mysql_query($this->getSuitableQuery());
     $i=0;
     while($room=mysql_fetch_array($rooms)){
       $this->chatrooms[$i]=new Chatroom($room[0]);
       $i++;
     }
+  }
+  function getSuitableQuery()
+  {
+    $groups=$this->user->getHisGroups();
+    $perm="(0,";
+    foreach($groups as $value)
+      $perm.=$value->id.", ";
+    $perm.="".$this->user->colID.")";  
+    $query="SELECT id FROM chatrooms WHERE perm IN ".$perm." ";
+    return $query;
   }
   function getFormattedChatroomList()
   {
