@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 06, 2012 at 11:29 AM
+-- Generation Time: Apr 14, 2012 at 09:31 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `chatrooms` (
   `perm` int(9) NOT NULL,
   `users` int(3) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `chatrooms`
@@ -76,7 +76,9 @@ CREATE TABLE IF NOT EXISTS `chatrooms` (
 
 INSERT INTO `chatrooms` (`id`, `name`, `perm`, `users`) VALUES
 (1, 'Chatroom 1', 0, 0),
-(2, 'Chatroom 2', 0, 0);
+(2, 'Chatroom 2', 0, 0),
+(3, 'Chat 3', 1, 1),
+(4, 'Chat 4', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -98,12 +100,20 @@ CREATE TABLE IF NOT EXISTS `class` (
 --
 
 CREATE TABLE IF NOT EXISTS `college` (
-  `id` int(9) NOT NULL,
+  `id` int(9) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
   `address` text NOT NULL,
   `principal` int(9) NOT NULL,
-  `ph_no` int(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `ph_no` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `college`
+--
+
+INSERT INTO `college` (`id`, `name`, `address`, `principal`, `ph_no`) VALUES
+(2, 'LCIT', 'Bhandu', 1, '8128764460');
 
 -- --------------------------------------------------------
 
@@ -159,7 +169,14 @@ CREATE TABLE IF NOT EXISTS `perm_group` (
   `type` int(1) NOT NULL DEFAULT '0',
   `created_by` int(9) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `perm_group`
+--
+
+INSERT INTO `perm_group` (`id`, `name`, `type`, `created_by`) VALUES
+(1, 'Test Group', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -169,11 +186,20 @@ CREATE TABLE IF NOT EXISTS `perm_group` (
 
 CREATE TABLE IF NOT EXISTS `perm_member` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `perm_id` int(5) NOT NULL,
   `u_id` int(9) NOT NULL,
   `accepted` tinyint(1) NOT NULL,
   `mem_since` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `perm_member`
+--
+
+INSERT INTO `perm_member` (`id`, `perm_id`, `u_id`, `accepted`, `mem_since`) VALUES
+(1, 1, 1, 1, '0000-00-00'),
+(2, 1, 2, 1, '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -240,31 +266,33 @@ CREATE TABLE IF NOT EXISTS `talks` (
   `by` int(9) NOT NULL,
   `ups` int(4) NOT NULL DEFAULT '0',
   `downs` int(4) NOT NULL DEFAULT '0',
+  `comments` int(5) NOT NULL DEFAULT '0',
   `scope` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `talks`
 --
 
-INSERT INTO `talks` (`id`, `content`, `date`, `by`, `ups`, `downs`, `scope`) VALUES
-(1, 'This is a demo Talk', '2012-02-23 04:58:27', 1, 0, 0, 1),
-(2, 'Another Talk', '2012-02-12 14:57:15', 1, 2, 3, 0),
-(3, 'Third Talk', '2012-02-12 14:57:15', 1, 0, 0, 0),
-(4, 'This kflksj lkasdlkjf hsdkfkjsadfkh askljdflksda', '2012-03-01 09:27:04', 1, 0, 0, 0),
-(5, 'kjerwjerfkhsdkljfhasdlkfhlksjdfklsdhf kljshafljksdahflksdhflkjashflkjaslkjsdlkjsdkljsdflkjsflkjflkjsdljpouigf ougj', '2012-03-01 09:27:57', 1, 0, 0, 0),
-(6, 'hie', '2012-03-01 09:30:02', 1, 0, 0, 0),
-(7, 'gfdkgfgmffhglhghgfh\r\n', '2012-03-01 09:35:28', 2, 0, 0, 0),
-(8, 'hdsfklashdkfj hasdkjfhaslkjdshfljk hsdfksdklhfkljshdfkljshadkl asdljkf ', '2012-03-01 09:37:43', 2, 0, 0, 0),
-(9, 'kishan is mad', '2012-03-01 09:48:04', 1, 0, 0, 0),
-(10, 'ajay is too mad', '2012-03-01 09:48:26', 1, 0, 0, 0),
-(11, 'Hie, how are you?', '2012-03-01 16:11:40', 1, 0, 0, 0),
-(12, 'Hey, I am Ajay!', '2012-03-04 16:29:22', 3, 0, 0, 0),
-(13, 'We are having presentation tomorrow! ', '2012-03-04 16:31:45', 2, 0, 0, 0),
-(14, 'Not ready for presentation yet!', '2012-03-04 16:32:09', 1, 0, 0, 0),
-(15, 'Result of Mid-sem is fabulous!', '2012-03-04 16:33:11', 2, 0, 0, 0),
-(16, 'Had lot of fun at Pratibha-12!', '2012-03-04 16:33:25', 3, 0, 0, 0);
+INSERT INTO `talks` (`id`, `content`, `date`, `by`, `ups`, `downs`, `comments`, `scope`) VALUES
+(1, 'This is a demo Talk', '2012-02-23 04:58:27', 1, 0, 0, 0, 1),
+(2, 'Another Talk', '2012-02-12 14:57:15', 1, 2, 3, 0, 0),
+(3, 'Third Talk', '2012-02-12 14:57:15', 1, 0, 0, 0, 0),
+(4, 'This kflksj lkasdlkjf hsdkfkjsadfkh askljdflksda', '2012-03-01 09:27:04', 1, 0, 0, 0, 0),
+(5, 'kjerwjerfkhsdkljfhasdlkfhlksjdfklsdhf kljshafljksdahflksdhflkjashflkjaslkjsdlkjsdkljsdflkjsflkjflkjsdljpouigf ougj', '2012-03-01 09:27:57', 1, 0, 0, 0, 0),
+(6, 'hie', '2012-03-01 09:30:02', 1, 0, 0, 0, 0),
+(7, 'gfdkgfgmffhglhghgfh\r\n', '2012-03-01 09:35:28', 2, 0, 0, 0, 0),
+(8, 'hdsfklashdkfj hasdkjfhaslkjdshfljk hsdfksdklhfkljshdfkljshadkl asdljkf ', '2012-03-01 09:37:43', 2, 0, 0, 0, 0),
+(9, 'kishan is mad', '2012-03-01 09:48:04', 1, 0, 0, 0, 0),
+(10, 'ajay is too mad', '2012-03-01 09:48:26', 1, 0, 0, 0, 0),
+(11, 'Hie, how are you?', '2012-03-01 16:11:40', 1, 0, 0, 0, 0),
+(12, 'Hey, I am Ajay!', '2012-03-04 16:29:22', 3, 0, 0, 0, 0),
+(13, 'We are having presentation tomorrow! ', '2012-03-04 16:31:45', 2, 0, 0, 0, 0),
+(14, 'Not ready for presentation yet!', '2012-03-04 16:32:09', 1, 0, 0, 0, 0),
+(15, 'Result of Mid-sem is fabulous!', '2012-03-04 16:33:11', 2, 0, 0, 0, 0),
+(16, 'Had lot of fun at Pratibha-12!', '2012-03-04 16:33:25', 3, 0, 0, 0, 0),
+(17, 'Testing', '2012-04-14 08:23:41', 1, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 

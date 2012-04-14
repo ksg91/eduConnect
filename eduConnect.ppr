@@ -222,9 +222,10 @@ eduConnect
 19=chats.php
 20=postChat.php
 21=chatroom.php
+22=classes\groups.php
 [Selected Project Files]
 Main=
-Selected=classes\users.php
+Selected=classes\talks.php
 [login.php]
 TopLine=1
 Caret=14,14
@@ -239,7 +240,7 @@ TopLine=1
 Caret=11,16
 [classes\includes.php]
 TopLine=1
-Caret=28,10
+Caret=23,11
 [classes\layoutclasses.php]
 TopLine=36
 Caret=15,52
@@ -250,11 +251,11 @@ Caret=15,148
 TopLine=1
 Caret=1,2
 [classes\talks.php]
-TopLine=67
-Caret=4,100
+TopLine=42
+Caret=32,61
 [classes\users.php]
-TopLine=19
-Caret=32,14
+TopLine=21
+Caret=28,48
 [latestdump.sql]
 TopLine=139
 Caret=1,180
@@ -290,4 +291,7 @@ TopLine=1
 Caret=56,6
 [chatroom.php]
 TopLine=1
-Caret=1,7
+Caret=3,15
+[classes\groups.php]
+TopLine=1
+Caret=3,19

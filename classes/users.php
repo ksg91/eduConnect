@@ -5,7 +5,7 @@ class User
   function __construct($id)
   {
     $this->id=$id;
-    $row=mysql_fetch_array(mysql_query("SELECT * FROM users WHERE id=".$this->id));
+    $row=mysql_fetch_array(mysql_query("SELECT * FROM users WHERE id=".$id));
     $this->name=$row['name'];
     $this->email=$row['email'];
     $this->perm=$row['perm'];
