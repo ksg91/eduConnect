@@ -225,7 +225,7 @@ eduConnect
 22=classes\groups.php
 [Selected Project Files]
 Main=
-Selected=classes\talks.php
+Selected=postChat.php
 [login.php]
 TopLine=1
 Caret=14,14
@@ -249,16 +249,16 @@ TopLine=115
 Caret=15,148
 [index.php]
 TopLine=1
-Caret=1,2
+Caret=36,11
 [classes\talks.php]
-TopLine=42
-Caret=32,61
+TopLine=44
+Caret=3,68
 [classes\users.php]
-TopLine=21
-Caret=28,48
+TopLine=35
+Caret=20,51
 [latestdump.sql]
-TopLine=139
-Caret=1,180
+TopLine=288
+Caret=1,329
 [updateTalk.php]
 TopLine=1
 Caret=3,6
@@ -281,11 +281,11 @@ Caret=4,13
 TopLine=1
 Caret=1,2
 [classes\chatClasses.php]
-TopLine=39
-Caret=130,76
+TopLine=1
+Caret=28,8
 [chats.php]
 TopLine=1
-Caret=36,9
+Caret=31,5
 [postChat.php]
 TopLine=1
 Caret=56,6
