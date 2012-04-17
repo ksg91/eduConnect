@@ -29,6 +29,19 @@ class User
       return "MYSQL_ERROR";
     return true;
   }
+  function addComment($talk_id,$content)
+  {
+    if($content=="")
+      return NULL;
+    if(strlen($content)>2000)
+      return "LIMIT_EXCEED";
+    $q=mysql_query("INSERT INTO comments SET talk_id=".$talk_id.",content='".$content."',`by`=".$this->id.",`date`=CURRENT_TIMESTAMP");
+    $c=mysql_result(mysql_query("SELECT comments FROM talks WHERE id=".$talk_id),0);
+    $y=mysql_query("UPDATE talks SET comments=".++$c." WHERE id=".$talk_id);
+    if(!$q || !$c || !$y)
+      return "MYSQL_ERROR";
+    return true;
+  }
   function postToChat($chatpost,$roomID)
   {
     if($chatpost=="")

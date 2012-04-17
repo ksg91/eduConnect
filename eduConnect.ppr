@@ -220,15 +220,16 @@ eduConnect
 17=profile.php
 18=classes\chatClasses.php
 19=chats.php
+20=talk.php
 [Selected Project Files]
 Main=
-Selected=classes\constants.php
+Selected=chats.php
 [login.php]
 TopLine=1
 Caret=14,14
 [classes\constants.php]
 TopLine=1
-Caret=1,1
+Caret=3,3
 [classes\database.php]
 TopLine=1
 Caret=1,1
@@ -246,10 +247,10 @@ TopLine=115
 Caret=15,148
 [index.php]
 TopLine=1
-Caret=1,2
+Caret=3,16
 [classes\talks.php]
-TopLine=67
-Caret=4,100
+TopLine=19
+Caret=26,32
 [classes\users.php]
 TopLine=35
 Caret=12,76
@@ -261,7 +262,7 @@ TopLine=1
 Caret=1,3
 [doLogin.php]
 TopLine=1
-Caret=2,5
+Caret=21,9
 [autoLogin.php]
 TopLine=1
 Caret=2,7
@@ -279,7 +280,10 @@ TopLine=1
 Caret=1,2
 [classes\chatClasses.php]
 TopLine=32
-Caret=10,68
+Caret=5,68
 [chats.php]
 TopLine=1
 Caret=1,10
+[talk.php]
+TopLine=1
+Caret=50,12

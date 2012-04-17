@@ -29,12 +29,29 @@ class Talk
     $talk.=$this->content;
     $talk.='</div>';
     $talk.='<div class="container" style="text-align:right">';
-    $talk.='<a href="comments.php?id='.$this->id.'">Comments ('.$this->comments.')</a>';
+    $talk.='<a href="talk.php?id='.$this->id.'">Comments ('.$this->comments.')</a>';
     $talk.=' | <a href="comments.php?id='.$this->id.'">Ups ('.$this->ups.')</a>';
     $talk.=' | <a href="comments.php?id='.$this->id.'">Downs ('.$this->downs.')</a>';
     $talk.='</div>';
     $talk.='</div>';
     return $talk;
+  }
+  function getCommentForm()
+  {
+    $form="<div class=\"talk\"><div class=\"container\">";
+    $form.="<b>Let's Comment ;)</b></div>";
+    $form.="<div class=\"container\">";
+    $form.="<form action=\"".ABS_PATH."/comment.php?id=".$this->id."\" method=\"post\">";
+    $form.="<textarea rows=1 name=\"content\"></textarea>";
+    $form.="</div><div class=\"container\" style=\"text-align:right;\">";
+    $form.="<input type=\"submit\" value=\"Comment!\" />";
+    $form.="</div></div>";
+    return $form;
+  }
+  function getFormattedComments()
+  {
+    $comm=new Comments($this->id);
+    return $comm->getFormattedComments();
   }
   function getTime()
   {
@@ -127,6 +144,85 @@ class Talks
     $widget.='</ul>';
     $widget.='</div>';
     return $widget;
+  }
+}
+class Comment
+{
+  var $id,$talk_id,$content,$date,$by,$ups,$downs;
+  function __construct($id)
+  {
+    $this->id=$id;
+    $row=mysql_fetch_array(mysql_query("SELECT * FROM comments WHERE id=".$this->id));
+    $talk_id=$row['talk_id'];
+    $this->content=$row['content'];
+    $this->date=$row['date'];
+    $this->by=new User($row['by']);
+    $this->ups=$row['ups'];
+    $this->downs=$row['downs'];
+  }
+  function getFormattedComment()
+  {
+    $talk='<div class="talk">';
+    $talk.='<div class="container">';
+    $talk.='<div class="proPic">';
+    $talk.='<a href="'.ABS_PATH.'/profile.php?id='.$this->by->id.'">';
+    $talk.='<img src="'.ABS_PATH.'/'.$this->by->proPic.'" alt="profile pic" />';
+    $talk.='</div>';
+    $talk.='<div class="name">'.$this->by->name.'</div></a>';
+    $talk.='<div class="time">'.$this->getTime().'</div>';
+    $talk.='</div>';
+    $talk.='<div class="container">';
+    $talk.=$this->content;
+    $talk.='</div>';
+    $talk.='<div class="container" style="text-align:right">';
+    $talk.='<a href="comments.php?id='.$this->id.'">Ups ('.$this->ups.')</a>';
+    $talk.=' | <a href="comments.php?id='.$this->id.'">Downs ('.$this->downs.')</a>';
+    $talk.='</div>';
+    $talk.='</div>';
+    return $talk;
+  }
+  function getTime()
+  {
+    $pt=strtotime($this->date);
+    $diff=time()-$pt;
+    $diff;
+    if($diff<(24*60*60))
+    {
+      if($diff<(60*60))
+      {
+        if($diff<(60))
+          return "just now";
+        return Date("i",time()-$pt)." minutes ago";
+      }
+      return Date("G",time()-$pt)." hours ago";
+    }
+    return $this->date;
+  }
+}
+class Comments
+{
+  var $id,$comments;
+  function __construct($id)
+  {
+    $this->id=$id;
+    $this->loadComments();
+  }
+  function loadComments()
+  {
+    $talk_id=mysql_query("SELECT id FROM comments WHERE talk_id=".$this->id);
+    $i=0;
+    while (($com=mysql_fetch_array($talk_id))) {
+      $this->comments[$i]=new Comment($com[0]);
+      $i++;    	
+    }  
+  }
+  function getFormattedComments()
+  {
+    $coms="<div class=\"talk\" style=\"min-height:10px;\"><div class=\"container\"><b>Comments</b></div></div>";
+    foreach($this->comments as $value){
+      $coms.=$value->getFormattedComment();
+    }
+    return $coms;
   }
 }
 ?>
