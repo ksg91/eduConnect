@@ -52,7 +52,7 @@ class LayoutStruct
     echo "<div style=\"text-align:right;\">";
     echo "<form action=\"search.php\" method=\"post\">";
     echo "<b style=\"color:#CCCCCC;\">Search:</b><input type=\"text\" name=\"criteria\" />";
-    echo "<input type=\"submit\" value=\"Go!\" /> | ";
+    echo "<input type=\"submit\" value=\"Go!\" /></form> | ";
     echo "<a href=\"".ABS_PATH."/logout.php\">Logout</a></div>";
     echo "</div>";
     echo "</div>";
