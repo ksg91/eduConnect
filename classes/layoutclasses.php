@@ -49,7 +49,11 @@ class LayoutStruct
     echo " | <a href=\"".ABS_PATH."/pms.php\">PMs</a>";
     echo " | <a href=\"".ABS_PATH."/forum.php\">Forums</a>";
     echo " | <a href=\"".ABS_PATH."/chats.php\">Chats</a>";
-    echo "<div style=\"text-align:right;\"><a href=\"".ABS_PATH."/logout.php\">Logout</a></div>";
+    echo "<div style=\"text-align:right;\">";
+    echo "<form action=\"search.php\" method=\"post\">";
+    echo "<b style=\"color:#CCCCCC;\">Search:</b><input type=\"text\" name=\"criteria\" />";
+    echo "<input type=\"submit\" value=\"Go!\" /> | ";
+    echo "<a href=\"".ABS_PATH."/logout.php\">Logout</a></div>";
     echo "</div>";
     echo "</div>";
     echo "<div id=\"content-area\">";

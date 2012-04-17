@@ -9,6 +9,7 @@ include("generalClasses.php");
 include("pmclasses.php");
 include("chatClasses.php");
 include("groups.php");
+include("searchClass.php");
 $DB=new DatabaseCon();
 $DB->connect();
 ?>
