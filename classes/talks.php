@@ -89,6 +89,11 @@ class Talks
     foreach($groups as $value)
       $perm.=$value->id.", ";
     $perm.="".$this->user->colID.")";  
+    if($this->scope==0)
+    {
+      $query="SELECT id FROM talks WHERE scope=0 OR scope IN ".$perm." ORDER BY `date` DESC LIMIT ".$this->from.",20";
+      return $query;
+    }
     $query="SELECT id FROM talks WHERE scope=".$this->scope." AND scope IN ".$perm." ORDER BY `date` DESC LIMIT ".$this->from.",20";
     return $query;
   }
@@ -122,6 +127,13 @@ class Talks
     $form.="<form action=\"".ABS_PATH."/updateTalk.php\" method=\"post\">";
     $form.="<textarea name=\"content\"></textarea>";
     $form.="</div><div class=\"container\" style=\"text-align:right;\">";
+    $form.="<b>Scope:</b><select name=\"scope\">";
+    $form.="<option value=0>All</option>";
+    $perms=$this->user->getHisGroups();
+    foreach($perms as $value){
+      $form.="<option value=".$value->id.">".$value->name."</option>";
+    }
+    $form.="</select>";
     $form.="<input type=\"submit\" value=\"Talk!\" />";
     $form.="</div></div>";
     return $form;

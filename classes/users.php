@@ -18,13 +18,13 @@ class User
     $this->colID=$row['college_id'];
     $this->lastseen=$row['lastseen'];
   }
-  function addTalk($talk)
+  function addTalk($talk,$scope)
   {
     if($talk=="")
       return NULL;
     if(strlen($talk)>2000)
       return "LIMIT_EXCEED";
-    $q=mysql_query("INSERT INTO talks SET content='".$talk."',`by`=".$this->id.",`date`=CURRENT_TIMESTAMP,scope=0");
+    $q=mysql_query("INSERT INTO talks SET content='".$talk."',`by`=".$this->id.",`date`=CURRENT_TIMESTAMP,scope=".$scope);
     if(!$q)
       return "MYSQL_ERROR";
     return true;
