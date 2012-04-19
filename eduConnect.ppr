@@ -226,7 +226,7 @@ eduConnect
 23=updown.php
 [Selected Project Files]
 Main=
-Selected=doLogin.php
+Selected=latestdump.sql
 [login.php]
 TopLine=1
 Caret=14,14
@@ -243,7 +243,7 @@ Caret=11,16
 TopLine=1
 Caret=21,12
 [classes\layoutclasses.php]
-TopLine=43
+TopLine=42
 Caret=15,52
 [resource\main.css]
 TopLine=115
@@ -252,14 +252,14 @@ Caret=15,148
 TopLine=1
 Caret=4,7
 [classes\talks.php]
-TopLine=198
+TopLine=34
 Caret=101,34
 [classes\users.php]
-TopLine=1
-Caret=104,47
+TopLine=48
+Caret=14,90
 [latestdump.sql]
-TopLine=160
-Caret=1,180
+TopLine=341
+Caret=1,382
 [updateTalk.php]
 TopLine=1
 Caret=34,5
@@ -298,4 +298,4 @@ TopLine=1
 Caret=16,11
 [updown.php]
 TopLine=1
-Caret=1,6
+Caret=1,5
