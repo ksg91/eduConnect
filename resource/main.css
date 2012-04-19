@@ -151,7 +151,7 @@ li
 {
   width: 29% ;
   color: #DDDDDD;
-  //border: 2px solid #404040;
+  border: 2px solid #404040;
   float: right;
   background-image: url("foot-bg.png");
   background-repeat: repeat-x repeat-y;
