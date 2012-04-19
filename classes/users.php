@@ -137,8 +137,6 @@ class User
     $widget='<div>';
     $widget.='<ul style="list-style:none;">';
     $widget.='<li><a href="pms.php">Private Messages('.$this->getUnreadPMCount().'/'.$this->getTotalPMCount().')</a></li>';
-    $widget.='<li><a href="friends.php">Friends(3)</a></li>';
-    $widget.='<li><a href="pms.php">Notification(1)</a></li>';
     $widget.='</ul>';
     $widget.='</div>';
     return $widget;
