@@ -30,8 +30,8 @@ class Talk
     $talk.='</div>';
     $talk.='<div class="container" style="text-align:right">';
     $talk.='<a href="talk.php?id='.$this->id.'">Comments ('.$this->comments.')</a>';
-    $talk.=' | <a href="comments.php?id='.$this->id.'">Ups ('.$this->ups.')</a>';
-    $talk.=' | <a href="comments.php?id='.$this->id.'">Downs ('.$this->downs.')</a>';
+    $talk.=' | <a href="updown.php?id='.$this->id.'&amp;action=up&amp;talk=1">Ups ('.$this->ups.')</a>';
+    $talk.=' | <a href="updown.php?id='.$this->id.'&amp;action=down&amp;talk=1">Downs ('.$this->downs.')</a>';
     $talk.='</div>';
     $talk.='</div>';
     return $talk;

@@ -42,6 +42,68 @@ class User
       return "MYSQL_ERROR";
     return true;
   }
+  function  addUpDowns($action,$type,$c_id)
+  { 
+    $c=mysql_result(mysql_query("SELECT COUNT(*) FROM updown WHERE `c_id`=".$c_id." AND talk=".$type." AND u_id=".$this->id),0);
+    if($action=="up")
+      $t=1;
+    else
+      $t=0;
+    if($c>0)
+    {
+      $up=mysql_result(mysql_query("SELECT up FROM updown WHERE c_id=".$c_id." AND talk=".$type),0);
+      if($up==$t)
+        return;
+      if($t==1){  
+        mysql_query("UPDATE updown SET up=".$t." WHERE c_id=".$c_id." AND talk=".$type." AND u_id=".$this->id);
+        echo mysql_error();
+        if($type){
+          $updown=mysql_fetch_array(mysql_query("SELECT ups,downs FROM talks WHERE id=".$c_id));
+          mysql_query("UPDATE talks SET ups=".($updown[0]+1).",downs=".($updown[1]-1)." WHERE id=".$c_id);
+        }
+        else{
+          $updown=mysql_fetch_array(mysql_query("SELECT ups,downs FROM comments WHERE id=".$c_id));
+          mysql_query("UPDATE comments SET ups=".($updown[0]+1).",downs=".($updown[1]-1)." WHERE id=".$c_id);
+        }
+      }
+      else if($t==0){
+      mysql_query("UPDATE updown SET up=".$t." WHERE c_id=".$c_id." AND talk=".$type." AND u_id=".$this->id);  
+        if($type){
+          $updown=mysql_fetch_array(mysql_query("SELECT ups,downs FROM talks WHERE id=".$c_id));
+          mysql_query("UPDATE talks SET ups=".($updown[0]-1).",downs=".($updown[1]+1)." WHERE id=".$c_id);
+        }
+        else{
+          $updown=mysql_fetch_array(mysql_query("SELECT ups,downs FROM comments WHERE id=".$c_id));
+          mysql_query("UPDATE comments SET ups=".($updown[0]-1).",downs=".($updown[1]+1)." WHERE id=".$c_id);
+        }
+      }
+    }
+    else
+    {
+      mysql_query("INSERT INTO updown SET up=".$t.", c_id=".$c_id.",talk=".$type.",u_id=".$this->id);
+      if($t==1){  
+        mysql_query("UPDATE updown SET up=".$t.", c_id=".$c_id.",u_id=".$this->id." WHERE id=".$c_id." AND talk=".$type);
+        if($type){
+          $updown=mysql_fetch_array(mysql_query("SELECT ups,downs FROM talks WHERE id=".$c_id));
+          mysql_query("UPDATE talks SET ups=".($updown[0]+1)." WHERE id=".$c_id);
+        }
+        else{
+          $updown=mysql_fetch_array(mysql_query("SELECT ups,downs FROM comments WHERE id=".$c_id));
+          mysql_query("UPDATE comments SET ups=".($updown[0]+1)." WHERE id=".$c_id);
+        }
+      }
+      else if($t==0){  
+        if($type){
+          $updown=mysql_fetch_array(mysql_query("SELECT ups,downs FROM talks WHERE id=".$c_id));
+          mysql_query("UPDATE talks SET downs=".($updown[1]+1)." WHERE id=".$c_id);
+        }
+        else{
+          $updown=mysql_fetch_array(mysql_query("SELECT ups,downs FROM comments WHERE id=".$c_id));
+          mysql_query("UPDATE comments SET downs=".($updown[1]+1)." WHERE id=".$c_id);
+        }
+      }
+    }
+  }
   function postToChat($chatpost,$roomID)
   {
     if($chatpost=="")

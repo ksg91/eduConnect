@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 14, 2012 at 09:31 AM
+-- Generation Time: Apr 19, 2012 at 06:09 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `chatposts` (
   `by` int(9) NOT NULL,
   `room_id` int(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `chatposts`
@@ -54,7 +54,9 @@ INSERT INTO `chatposts` (`id`, `content`, `time`, `by`, `room_id`) VALUES
 (5, 'whu?', '2012-04-05 10:32:08', 1, 1),
 (6, 'duh', '2012-04-04 10:32:12', 1, 1),
 (7, 'kfjg hdfkjh dfkghdfk dklh gkjd hgksdhdgkf', '2012-04-05 10:32:16', 1, 1),
-(8, 'lolll', '2012-04-05 11:07:35', 1, 1);
+(8, 'lolll', '2012-04-05 11:07:35', 1, 1),
+(9, 'wow', '2012-04-18 12:46:23', 3, 4),
+(10, 'what?', '2012-04-18 12:50:00', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -106,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `college` (
   `principal` int(9) NOT NULL,
   `ph_no` varchar(15) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `college`
@@ -122,13 +124,37 @@ INSERT INTO `college` (`id`, `name`, `address`, `principal`, `ph_no`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `comments` (
-  `id` int(9) NOT NULL,
+  `id` int(9) NOT NULL AUTO_INCREMENT,
   `talk_id` int(9) NOT NULL,
   `content` varchar(1000) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `ups` int(4) NOT NULL DEFAULT '0',
   `downs` int(4) NOT NULL DEFAULT '0',
-  `by` int(9) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `by` int(9) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `talk_id`, `content`, `date`, `ups`, `downs`, `by`) VALUES
+(1, 17, 'Testing Passed', '2012-04-17 16:40:06', 0, 0, 1),
+(2, 17, 'Test Comment', '2012-04-17 16:50:56', 0, 0, 1),
+(3, 16, 'Yeah Man, It was Fun', '2012-04-17 16:52:01', 0, 0, 1),
+(4, 16, 'Test', '2012-04-17 16:57:40', 0, 0, 1),
+(5, 16, 'Test 2', '2012-04-17 16:58:17', 0, 0, 1),
+(6, 16, 'Test 2', '2012-04-17 16:58:51', 0, 0, 1),
+(7, 16, 'Test 2', '2012-04-17 16:59:22', 0, 0, 1),
+(8, 16, 'sdkf;sldfj', '2012-04-17 17:00:18', 0, 0, 1),
+(9, 16, 'sdkf;sldfj', '2012-04-17 17:00:59', 0, 0, 1),
+(10, 16, 'sdkf;sldfj', '2012-04-17 17:01:16', 0, 0, 1),
+(11, 16, 'esetstsd', '2012-04-17 17:01:34', 0, 0, 1),
+(12, 18, 'Testing is Cool', '2012-04-17 17:02:10', 0, 0, 1),
+(13, 15, 'Hehe, Congrats :)', '2012-04-17 17:15:50', 0, 0, 1),
+(14, 20, 'test', '2012-04-17 17:58:36', 0, 0, 1),
+(15, 19, 'kejflksdj;flsd', '2012-04-17 17:59:20', 0, 0, 1),
+(16, 20, 'wow', '2012-04-18 12:43:19', 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -262,14 +288,14 @@ CREATE TABLE IF NOT EXISTS `student` (
 CREATE TABLE IF NOT EXISTS `talks` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `content` varchar(2000) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `by` int(9) NOT NULL,
   `ups` int(4) NOT NULL DEFAULT '0',
   `downs` int(4) NOT NULL DEFAULT '0',
   `comments` int(5) NOT NULL DEFAULT '0',
   `scope` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `talks`
@@ -277,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `talks` (
 
 INSERT INTO `talks` (`id`, `content`, `date`, `by`, `ups`, `downs`, `comments`, `scope`) VALUES
 (1, 'This is a demo Talk', '2012-02-23 04:58:27', 1, 0, 0, 0, 1),
-(2, 'Another Talk', '2012-02-12 14:57:15', 1, 2, 3, 0, 0),
+(2, 'Another Talk', '2012-02-12 14:57:15', 1, 0, 0, 0, 0),
 (3, 'Third Talk', '2012-02-12 14:57:15', 1, 0, 0, 0, 0),
 (4, 'This kflksj lkasdlkjf hsdkfkjsadfkh askljdflksda', '2012-03-01 09:27:04', 1, 0, 0, 0, 0),
 (5, 'kjerwjerfkhsdkljfhasdlkfhlksjdfklsdhf kljshafljksdahflksdhflkjashflkjaslkjsdlkjsdkljsdflkjsflkjflkjsdljpouigf ougj', '2012-03-01 09:27:57', 1, 0, 0, 0, 0),
@@ -290,10 +316,36 @@ INSERT INTO `talks` (`id`, `content`, `date`, `by`, `ups`, `downs`, `comments`, 
 (12, 'Hey, I am Ajay!', '2012-03-04 16:29:22', 3, 0, 0, 0, 0),
 (13, 'We are having presentation tomorrow! ', '2012-03-04 16:31:45', 2, 0, 0, 0, 0),
 (14, 'Not ready for presentation yet!', '2012-03-04 16:32:09', 1, 0, 0, 0, 0),
-(15, 'Result of Mid-sem is fabulous!', '2012-03-04 16:33:11', 2, 0, 0, 0, 0),
-(16, 'Had lot of fun at Pratibha-12!', '2012-03-04 16:33:25', 3, 0, 0, 0, 0),
-(17, 'Testing', '2012-04-14 08:23:41', 1, 0, 0, 0, 0);
+(15, 'Result of Mid-sem is fabulous!', '2012-04-17 17:15:50', 2, 0, 0, 1, 0),
+(16, 'Had lot of fun at Pratibha-12!', '2012-04-17 17:01:34', 3, 0, 0, 2, 0),
+(17, 'Testing', '2012-04-14 08:23:41', 1, 0, 0, 0, 0),
+(18, 'Test', '2012-04-17 17:02:10', 1, 0, 0, 1, 0),
+(19, 'Test Talk in Test Group', '2012-04-17 17:10:09', 1, 0, 0, 1, 1),
+(20, 'Test Group Talk', '2012-04-17 17:58:36', 1, 0, 1, 2, 1),
+(21, 'Hello', '2012-04-19 02:33:22', 1, 0, 1, 0, 0);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `updown`
+--
+
+CREATE TABLE IF NOT EXISTS `updown` (
+  `id` int(9) NOT NULL AUTO_INCREMENT,
+  `u_id` int(9) NOT NULL,
+  `c_id` int(9) NOT NULL,
+  `talk` tinyint(1) NOT NULL DEFAULT '1',
+  `up` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+
+--
+-- Dumping data for table `updown`
+--
+
+INSERT INTO `updown` (`id`, `u_id`, `c_id`, `talk`, `up`) VALUES
+(15, 1, 21, 1, 0),
+(16, 1, 20, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -324,6 +376,6 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `perm`, `address`, `dob`, `pass`, `ph_no`, `profile_pic`, `gender`, `about_me`, `college_id`, `lastseen`) VALUES
-(1, 'Kishan Gor', 'ego@ksg91.com', 1, '', '0000-00-00', 'b1634c02812896b87fff3d56f89e36af', '', 'proPic/default.png', '', '', 0, '2012-03-01 08:56:09'),
-(2, 'Sonali Patel', 'sonalipatel071@gmail.com', 1, 'Dharti', '1991-05-08', '371ab955fdc11c44c980779c3135b155', '', 'proPic/default_f.png', '\0', 'I am  cute!', 0, '2012-03-04 16:18:39'),
-(3, 'Ajay Mandera', 'ajay_m65@yahoo.com', 1, 'Adityana', '1991-05-15', '29e457082db729fa1059d4294ede3909', '9723414186', 'proPic/default.png', '', 'I am cool guy', 0, '2012-03-04 16:28:37');
+(1, 'Kishan Gor', 'ego@ksg91.com', 1, '', '0000-00-00', 'b1634c02812896b87fff3d56f89e36af', '', 'proPic/default.png', '', 'I love code!', 2, '2012-04-17 17:46:52'),
+(2, 'Sonali Patel', 'sonalipatel071@gmail.com', 1, 'Dharti', '1991-05-08', '371ab955fdc11c44c980779c3135b155', '', 'proPic/default_f.png', '\0', 'I am  cute!', 2, '2012-04-17 17:46:52'),
+(3, 'Ajay Mandera', 'ajay_m65@yahoo.com', 1, 'Adityana', '1991-05-15', '29e457082db729fa1059d4294ede3909', '9723414186', 'proPic/default.png', '', 'I am cool guy', 2, '2012-04-17 17:46:52');
