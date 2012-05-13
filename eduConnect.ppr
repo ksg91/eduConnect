@@ -227,7 +227,7 @@ eduConnect
 24=forums.php
 [Selected Project Files]
 Main=
-Selected=classes\forumClasses.php
+Selected=latestdump.sql
 [login.php]
 TopLine=1
 Caret=14,14
@@ -244,7 +244,7 @@ Caret=11,16
 TopLine=1
 Caret=29,13
 [classes\layoutclasses.php]
-TopLine=20
+TopLine=25
 Caret=27,68
 [resource\main.css]
 TopLine=115
@@ -253,14 +253,14 @@ Caret=15,148
 TopLine=1
 Caret=4,7
 [classes\talks.php]
-TopLine=42
-Caret=31,191
+TopLine=15
+Caret=21,36
 [classes\users.php]
-TopLine=131
+TopLine=90
 Caret=14,90
 [latestdump.sql]
-TopLine=340
-Caret=1,382
+TopLine=414
+Caret=1,455
 [updateTalk.php]
 TopLine=1
 Caret=34,5
@@ -298,8 +298,8 @@ Caret=128,11
 TopLine=1
 Caret=1,5
 [classes\forumClasses.php]
-TopLine=4
-Caret=7,39
+TopLine=59
+Caret=94,98
 [forums.php]
 TopLine=1
-Caret=21,11
+Caret=55,9

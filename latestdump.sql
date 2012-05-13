@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 19, 2012 at 06:09 AM
+-- Generation Time: May 13, 2012 at 08:58 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `chatposts` (
   `by` int(9) NOT NULL,
   `room_id` int(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `chatposts`
@@ -56,7 +56,11 @@ INSERT INTO `chatposts` (`id`, `content`, `time`, `by`, `room_id`) VALUES
 (7, 'kfjg hdfkjh dfkghdfk dklh gkjd hgksdhdgkf', '2012-04-05 10:32:16', 1, 1),
 (8, 'lolll', '2012-04-05 11:07:35', 1, 1),
 (9, 'wow', '2012-04-18 12:46:23', 3, 4),
-(10, 'what?', '2012-04-18 12:50:00', 1, 4);
+(10, 'what?', '2012-04-18 12:50:00', 1, 4),
+(11, 'Hello\r\n', '2012-04-19 06:52:08', 1, 3),
+(12, 'How Are you?', '2012-04-19 06:52:14', 1, 3),
+(13, 'lol', '2012-04-19 06:52:51', 1, 3),
+(14, 'This is a chat room!', '2012-04-19 06:53:01', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -152,9 +156,9 @@ INSERT INTO `comments` (`id`, `talk_id`, `content`, `date`, `ups`, `downs`, `by`
 (11, 16, 'esetstsd', '2012-04-17 17:01:34', 0, 0, 1),
 (12, 18, 'Testing is Cool', '2012-04-17 17:02:10', 0, 0, 1),
 (13, 15, 'Hehe, Congrats :)', '2012-04-17 17:15:50', 0, 0, 1),
-(14, 20, 'test', '2012-04-17 17:58:36', 0, 0, 1),
+(14, 20, 'test', '2012-04-19 07:04:26', 1, 0, 1),
 (15, 19, 'kejflksdj;flsd', '2012-04-17 17:59:20', 0, 0, 1),
-(16, 20, 'wow', '2012-04-18 12:43:19', 0, 0, 1);
+(16, 20, 'wow', '2012-04-19 07:05:04', 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -169,6 +173,50 @@ CREATE TABLE IF NOT EXISTS `configs` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `param` (`param`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `forum`
+--
+
+CREATE TABLE IF NOT EXISTS `forum` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) NOT NULL,
+  `sec_id` int(5) NOT NULL,
+  `perm_g` int(5) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `forum`
+--
+
+INSERT INTO `forum` (`id`, `name`, `sec_id`, `perm_g`) VALUES
+(1, 'Forum 1', 1, 0),
+(2, 'Forum 2', 2, 0),
+(3, 'Forum 3', 1, 0),
+(4, 'Forum 4', 2, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `forum_sec`
+--
+
+CREATE TABLE IF NOT EXISTS `forum_sec` (
+  `id` int(4) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `forum_sec`
+--
+
+INSERT INTO `forum_sec` (`id`, `name`) VALUES
+(1, 'Section 1'),
+(2, 'Section 2');
 
 -- --------------------------------------------------------
 
@@ -322,7 +370,30 @@ INSERT INTO `talks` (`id`, `content`, `date`, `by`, `ups`, `downs`, `comments`, 
 (18, 'Test', '2012-04-17 17:02:10', 1, 0, 0, 1, 0),
 (19, 'Test Talk in Test Group', '2012-04-17 17:10:09', 1, 0, 0, 1, 1),
 (20, 'Test Group Talk', '2012-04-17 17:58:36', 1, 0, 1, 2, 1),
-(21, 'Hello', '2012-04-19 02:33:22', 1, 0, 1, 0, 0);
+(21, 'Hello', '2012-04-19 02:33:22', 1, 1, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `topic`
+--
+
+CREATE TABLE IF NOT EXISTS `topic` (
+  `id` int(9) NOT NULL DEFAULT '0',
+  `title` varchar(200) NOT NULL,
+  `content` varchar(2000) NOT NULL,
+  `by` int(9) NOT NULL,
+  `f_id` int(9) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `topic`
+--
+
+INSERT INTO `topic` (`id`, `title`, `content`, `by`, `f_id`, `date`) VALUES
+(0, 'Topic 1', 'This is first topic', 1, 1, '2012-05-13 20:38:36');
 
 -- --------------------------------------------------------
 
@@ -337,15 +408,17 @@ CREATE TABLE IF NOT EXISTS `updown` (
   `talk` tinyint(1) NOT NULL DEFAULT '1',
   `up` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `updown`
 --
 
 INSERT INTO `updown` (`id`, `u_id`, `c_id`, `talk`, `up`) VALUES
-(15, 1, 21, 1, 0),
-(16, 1, 20, 1, 0);
+(15, 1, 21, 1, 1),
+(16, 1, 20, 1, 0),
+(17, 1, 14, 0, 1),
+(18, 1, 16, 0, 0);
 
 -- --------------------------------------------------------
 
