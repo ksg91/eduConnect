@@ -8,7 +8,7 @@ class Search {
   function getResults()
   {
     $id=mysql_query("SELECT id FROM users WHERE name LIKE '%".$this->criteria."%'");
-    $result="";
+    $result="<div class=\"talk\" style=\"min-height:10px;\"><div class=\"container\"><b>Search Result For </b>".$this->criteria."</div></div>";
     while($uid=mysql_fetch_array($id)){
       $user=new User($uid[0]);
       $result.='<div class="talk">';

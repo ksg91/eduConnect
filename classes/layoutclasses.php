@@ -47,7 +47,7 @@ class LayoutStruct
     echo "<div id=\"head-nav\">";
     echo "<a href=\"".ABS_PATH."/index.php\">Home</a>";
     echo " | <a href=\"".ABS_PATH."/pms.php\">PMs</a>";
-    echo " | <a href=\"".ABS_PATH."/forum.php\">Forums</a>";
+    echo " | <a href=\"".ABS_PATH."/forums.php\">Forums</a>";
     echo " | <a href=\"".ABS_PATH."/chats.php\">Chats</a>";
     echo "<div style=\"text-align:right;\">";
     echo "<form action=\"search.php\" method=\"post\">";
@@ -65,6 +65,7 @@ class LayoutStruct
     echo $this->putWidgets();
     echo "</div>";
     echo "</div>";
+    echo "</body></html>";
   }
   function addWidget($code)
   {

@@ -187,8 +187,8 @@ class Comment
     $talk.=$this->content;
     $talk.='</div>';
     $talk.='<div class="container" style="text-align:right">';
-    $talk.='<a href="comments.php?id='.$this->id.'">Ups ('.$this->ups.')</a>';
-    $talk.=' | <a href="comments.php?id='.$this->id.'">Downs ('.$this->downs.')</a>';
+    $talk.='<a href="updown.php?id='.$this->id.'&amp;talk=0&amp;action=up">Ups ('.$this->ups.')</a>';
+    $talk.=' | <a href="updown.php?id='.$this->id.'&amp;talk=0&amp;action=down">Downs ('.$this->downs.')</a>';
     $talk.='</div>';
     $talk.='</div>';
     return $talk;
