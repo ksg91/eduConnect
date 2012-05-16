@@ -106,7 +106,7 @@ class Forum{
     $topics=$this->getTopics($from);
     $content="";
     foreach($topics as $value)
-      $content=$value->getFormattedTopic();
+      $content.=$value->getFormattedTopic();
     return $content;
   }
   function getAddTopicForm()
@@ -115,17 +115,10 @@ class Forum{
     $form.="<a href=\"#\" onClick=\"toggle('addTopic');\"><b>Add Topic</b></a></div>";
     $form.="<div id=\"addTopic\" style=\"display:none;\">";
     $form.="<div class=\"container\">";
-    $form.="<form action=\"".ABS_PATH."/addTopic.php\" method=\"post\">";
+    $form.="<form action=\"".ABS_PATH."/addTopic.php?id=".$this->id."\" method=\"post\">";
     $form.="<b>Title:<br /></b><input type=\"text\" name=\"title\" size=110 /><br />";
     $form.="<b>Content:</b><br /><textarea name=\"content\"></textarea>";
     $form.="</div><div class=\"container\" style=\"text-align:right;\">";
-    $form.="<b>Scope:</b><select name=\"scope\">";
-    $form.="<option value=0>All</option>";
-    $perms=$this->user->getHisGroups();
-    foreach($perms as $value){
-      $form.="<option value=".$value->id.">".$value->name."</option>";
-    }
-    $form.="</select>";
     $form.="<input type=\"submit\" value=\"Add!\" />";
     $form.="</div></div></div>";
     return $form;
@@ -163,14 +156,112 @@ class Topic {
     $content.='</div>';
     return $content;
   }
-  function getReplies()
+  function getReplies($from)
   {
+    $q=mysql_query("SELECT id FROM replies WHERE t_id=".$this->id." LIMIT ".$from.",20");
+    $i=0;
+    $replies=NULL;
+    while($r=mysql_fetch_array($q)){
+      $replies[$i]=new Reply($r['id']);
+      $i++;
+    }
+    return $replies;
+  }
+  function getTopicPost()
+  {
+    $talk='<div class="talk">';
+    $talk.='<div class="container">';
+    $talk.='<div class="proPic">';
+    $talk.='<a href="'.ABS_PATH.'/profile.php?id='.$this->by->id.'">';
+    $talk.='<img src="'.ABS_PATH.'/'.$this->by->proPic.'" alt="profile pic" />';
+    $talk.='</div>';
+    $talk.='<div class="name">'.$this->by->name.'</div></a>';
+    $talk.='<div class="time">'.$this->getTime().'</div>';
+    $talk.='</div>';
+    $talk.='<div class="container">';
+    $talk.="<b>".$this->title."</b>";
+    $talk.='</div>';
+    $talk.='<div class="container">';
+    $talk.=$this->content;
+    $talk.='</div>';
+    $talk.='</div>';
+    $talk.='<div class="container" style="background-color:#CACACA;">';
+    $talk.='<div style="text-align:center;"><b>Replies</b></div></a>';
+    $talk.='</div>';
+    return $talk;
+  }
+  function getFormattedReplies($from)
+  {
+    $replies=$this->getReplies($from);
+    $content="";
+    foreach($replies as $value)
+      $content.=$value->getFormattedReply();
+    return $content;
+  }
+  function getAddReplyForm()
+  {
+    $form="<div class=\"talk\" style=\"min-height:0px\"><div class=\"container\">";
+    $form.="<a href=\"#\" onClick=\"toggle('addReply');\"><b>Add Reply</b></a></div>";
+    $form.="<div id=\"addReply\" style=\"display:none;\">";
+    $form.="<div class=\"container\">";
+    $form.="<form action=\"".ABS_PATH."/addReply.php?id=".$this->id."\" method=\"post\">";
+    $form.="<b>Content:</b><br /><textarea name=\"content\"></textarea>";
+    $form.="</div><div class=\"container\" style=\"text-align:right;\">";
+    $form.="<input type=\"submit\" value=\"Add!\" />";
+    $form.="</div></div></div>";
+    return $form;
   }
   function getTime()
   {
-    $pt=strtotime($this->date);
+    $pt=strtotime($this->date)-19800;
     $diff=time()-$pt;
-    $diff;
+    if($diff<(24*60*60))
+    {
+      if($diff<(60*60))
+      {
+        if($diff<(60))
+          return "just now";
+        return Date("i",time()-$pt)." minutes ago";
+      }
+      return Date("G",time()-$pt)." hours ago";
+    }
+    return $this->date;
+  }
+}
+class Reply
+{
+  var $id,$t_id,$content,$by,$date;
+  function __construct($id)
+  {
+    $this->id=$id;
+    $row=mysql_fetch_array(mysql_query("SELECT * FROM replies WHERE id=".$id));
+    $this->t_id=$row['t_id'];
+    $this->content=$row['content'];
+    $this->by=new User($row['by']);
+    $this->date=$row['date'];
+  }
+  function getFormattedReply()
+  {
+    $content="";
+    $content.='<div class="talk">';
+    $content.="<div class=\"container\">";
+    $content.='<div class="proPic">';
+    $content.='<a href="'.ABS_PATH.'/profile.php?id='.$this->by->id.'">';
+    $content.='<img src="'.ABS_PATH.'/'.$this->by->proPic.'" alt="profile pic" />';
+    $content.="</div>";
+    $content.='<div class="name">'.$this->by->name.'</div></a>';
+    $content.='<div class="time">'.$this->getTime().'</div>';
+    $content.='</div>';
+    $content.="<div class=\"container\">";
+    $content.=$this->content;
+    $content.='</div>';
+    $content.='</div>';
+    return $content;
+  }
+  function getTime()
+  {
+    $pt=strtotime($this->date)-19800;
+    $diff=time()-$pt;
     if($diff<(24*60*60))
     {
       if($diff<(60*60))

@@ -115,6 +115,28 @@ class User
       return "MYSQL_ERROR";
     return true;
   }
+  function addTopic($f_id,$title,$content)
+  {
+    if($content=="")
+      return NULL;
+    if(strlen($content)>2000)
+      return "LIMIT_EXCEED";
+    $q=mysql_query("INSERT INTO topic SET title='".$title."',content='".$content."',`by`=".$this->id.",`date`=CURRENT_TIMESTAMP,f_id=".$f_id);
+    if(!$q)
+      return "MYSQL_ERROR:";
+    return true;
+  }
+  function addReply($t_id,$content)
+  {
+    if($content=="")
+      return NULL;
+    if(strlen($content)>2000)
+      return "LIMIT_EXCEED";
+    $q=mysql_query("INSERT INTO replies SET content='".$content."',`by`=".$this->id.",`date`=CURRENT_TIMESTAMP,t_id=".$t_id);
+    if(!$q)
+      return "MYSQL_ERROR:";
+    return true;
+  }
   function getHisGroups()
   {
     $q=mysql_query("SELECT DISTINCT perm_id FROM perm_member WHERE u_id=".$this->id." ");

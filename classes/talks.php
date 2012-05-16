@@ -55,9 +55,8 @@ class Talk
   }
   function getTime()
   {
-    $pt=strtotime($this->date);
+    $pt=strtotime($this->date)-19800;
     $diff=time()-$pt;
-    $diff;
     if($diff<(24*60*60))
     {
       if($diff<(60*60))
@@ -197,7 +196,6 @@ class Comment
   {
     $pt=strtotime($this->date);
     $diff=time()-$pt;
-    $diff;
     if($diff<(24*60*60))
     {
       if($diff<(60*60))
