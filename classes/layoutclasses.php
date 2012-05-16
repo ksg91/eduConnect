@@ -13,6 +13,7 @@ class HtmlHeads
     echo "<head>";
     echo "<title>".$this->title."</title>";
     echo "<link rel=\"stylesheet\" href=\"resource/main.css\" />";
+    echo "<script type=\"text/javascript\" src=\"resource/scripts.js\"></script>";
     echo "</head>";
   }
   function setTitle($title)
