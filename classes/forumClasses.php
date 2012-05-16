@@ -112,12 +112,12 @@ class Forum{
   function getAddTopicForm()
   {
     $form="<div class=\"talk\" style=\"min-height:0px\"><div class=\"container\">";
-    $form.="<a href=\"#\" onClick=\"toggle('addTopic');\"><b>Add Topic</b></div>";
+    $form.="<a href=\"#\" onClick=\"toggle('addTopic');\"><b>Add Topic</b></a></div>";
     $form.="<div id=\"addTopic\" style=\"display:none;\">";
     $form.="<div class=\"container\">";
     $form.="<form action=\"".ABS_PATH."/addTopic.php\" method=\"post\">";
-    $form.="<b>Title:</b><input type=\"text\" name=\"title\" size=110 /><br />";
-    $form.="<b>Content:</b><textarea name=\"content\"></textarea>";
+    $form.="<b>Title:<br /></b><input type=\"text\" name=\"title\" size=110 /><br />";
+    $form.="<b>Content:</b><br /><textarea name=\"content\"></textarea>";
     $form.="</div><div class=\"container\" style=\"text-align:right;\">";
     $form.="<b>Scope:</b><select name=\"scope\">";
     $form.="<option value=0>All</option>";
