@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 13, 2012 at 08:58 PM
+-- Generation Time: May 16, 2012 at 07:01 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -186,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `forum` (
   `sec_id` int(5) NOT NULL,
   `perm_g` int(5) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `forum`
@@ -196,7 +196,8 @@ INSERT INTO `forum` (`id`, `name`, `sec_id`, `perm_g`) VALUES
 (1, 'Forum 1', 1, 0),
 (2, 'Forum 2', 2, 0),
 (3, 'Forum 3', 1, 0),
-(4, 'Forum 4', 2, 0);
+(4, 'Forum 4', 2, 0),
+(5, 'Perm 2 Forum', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -243,14 +244,15 @@ CREATE TABLE IF NOT EXISTS `perm_group` (
   `type` int(1) NOT NULL DEFAULT '0',
   `created_by` int(9) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `perm_group`
 --
 
 INSERT INTO `perm_group` (`id`, `name`, `type`, `created_by`) VALUES
-(1, 'Test Group', 0, 1);
+(1, 'Test Group', 0, 1),
+(2, 'Perm 2 ', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -265,7 +267,7 @@ CREATE TABLE IF NOT EXISTS `perm_member` (
   `accepted` tinyint(1) NOT NULL,
   `mem_since` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `perm_member`
@@ -273,7 +275,8 @@ CREATE TABLE IF NOT EXISTS `perm_member` (
 
 INSERT INTO `perm_member` (`id`, `perm_id`, `u_id`, `accepted`, `mem_since`) VALUES
 (1, 1, 1, 1, '0000-00-00'),
-(2, 1, 2, 1, '0000-00-00');
+(2, 1, 2, 1, '0000-00-00'),
+(3, 2, 1, 1, '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -317,6 +320,32 @@ CREATE TABLE IF NOT EXISTS `principal` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `replies`
+--
+
+CREATE TABLE IF NOT EXISTS `replies` (
+  `id` int(9) NOT NULL AUTO_INCREMENT,
+  `t_id` int(9) NOT NULL,
+  `content` varchar(2000) NOT NULL,
+  `by` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `replies`
+--
+
+INSERT INTO `replies` (`id`, `t_id`, `content`, `by`, `date`) VALUES
+(1, 1, 'First Reply', 1, '2012-05-16 13:19:26'),
+(2, 1, 'Another Reply', 1, '2012-05-16 18:42:17'),
+(3, 1, 'Replues.s.se smnf, msnf ,sndfjsd \r\nsdkjbs b\r\nf sadf\r\nsdf\r\nsd\r\nfsd\r\nd\r\n', 1, '2012-05-16 18:42:30'),
+(4, 4, 'This is reply', 1, '2012-05-16 18:49:35'),
+(5, 1, 'Test reply', 2, '2012-05-16 18:56:45');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `student`
 --
 
@@ -343,7 +372,7 @@ CREATE TABLE IF NOT EXISTS `talks` (
   `comments` int(5) NOT NULL DEFAULT '0',
   `scope` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 --
 -- Dumping data for table `talks`
@@ -370,7 +399,10 @@ INSERT INTO `talks` (`id`, `content`, `date`, `by`, `ups`, `downs`, `comments`, 
 (18, 'Test', '2012-04-17 17:02:10', 1, 0, 0, 1, 0),
 (19, 'Test Talk in Test Group', '2012-04-17 17:10:09', 1, 0, 0, 1, 1),
 (20, 'Test Group Talk', '2012-04-17 17:58:36', 1, 0, 1, 2, 1),
-(21, 'Hello', '2012-04-19 02:33:22', 1, 1, 0, 0, 0);
+(21, 'Hello', '2012-04-19 02:33:22', 1, 1, 0, 0, 0),
+(22, 'Test Talk', '2012-05-16 12:38:13', 1, 0, 0, 0, 0),
+(23, 'Test', '2012-05-16 12:47:26', 1, 0, 0, 0, 0),
+(24, 'Test 1', '2012-05-16 18:21:48', 1, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -379,21 +411,25 @@ INSERT INTO `talks` (`id`, `content`, `date`, `by`, `ups`, `downs`, `comments`, 
 --
 
 CREATE TABLE IF NOT EXISTS `topic` (
-  `id` int(9) NOT NULL DEFAULT '0',
+  `id` int(9) NOT NULL AUTO_INCREMENT,
   `title` varchar(200) NOT NULL,
   `content` varchar(2000) NOT NULL,
   `by` int(9) NOT NULL,
   `f_id` int(9) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `topic`
 --
 
 INSERT INTO `topic` (`id`, `title`, `content`, `by`, `f_id`, `date`) VALUES
-(0, 'Topic 1', 'This is first topic', 1, 1, '2012-05-13 20:38:36');
+(1, 'Topic 1', 'This is first topic', 1, 1, '2012-05-13 20:38:36'),
+(2, 'Test Topic', 'This is a test topic.', 1, 1, '2012-05-16 12:24:31'),
+(3, 'Test Topic', 'Topic\r\n', 1, 1, '2012-05-16 12:25:13'),
+(4, 'Topic 1', 'Topic Content', 1, 3, '2012-05-16 12:26:38'),
+(5, 'This Is Topic Title', 'This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.This is topic Content.', 1, 2, '2012-05-16 18:11:02');
 
 -- --------------------------------------------------------
 

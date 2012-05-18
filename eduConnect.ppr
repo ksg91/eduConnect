@@ -229,9 +229,10 @@ eduConnect
 26=resource\scripts.js
 27=addTopic.php
 28=topic.php
+29=addReply.php
 [Selected Project Files]
 Main=
-Selected=classes\forumClasses.php
+Selected=latestdump.sql
 [login.php]
 TopLine=1
 Caret=14,14
@@ -257,14 +258,14 @@ Caret=15,148
 TopLine=1
 Caret=4,7
 [classes\talks.php]
-TopLine=36
-Caret=4,71
+TopLine=11
+Caret=12,25
 [classes\users.php]
-TopLine=100
-Caret=143,124
+TopLine=150
+Caret=121,135
 [latestdump.sql]
-TopLine=413
-Caret=3,425
+TopLine=450
+Caret=1,491
 [updateTalk.php]
 TopLine=1
 Caret=3,6
@@ -302,8 +303,8 @@ Caret=128,11
 TopLine=1
 Caret=1,5
 [classes\forumClasses.php]
-TopLine=181
-Caret=30,227
+TopLine=236
+Caret=23,271
 [forums.php]
 TopLine=1
 Caret=31,7
@@ -315,7 +316,10 @@ TopLine=1
 Caret=20,1
 [addTopic.php]
 TopLine=1
-Caret=1,5
+Caret=3,6
 [topic.php]
 TopLine=1
-Caret=72,11
+Caret=3,14
+[addReply.php]
+TopLine=1
+Caret=29,4

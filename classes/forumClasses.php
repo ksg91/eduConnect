@@ -92,7 +92,7 @@ class Forum{
   }
   function getTopics($from)
   {
-    $q=mysql_query("SELECT id FROM topic WHERE f_id=".$this->id." LIMIT ".$from.",20");
+    $q=mysql_query("SELECT id FROM topic WHERE f_id=".$this->id." ORDER BY id DESC LIMIT ".$from.",20");
     $i=0;
     $topics=NULL;
     while($topic=mysql_fetch_array($q)){
