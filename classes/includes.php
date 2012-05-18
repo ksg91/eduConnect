@@ -11,6 +11,7 @@ include("chatClasses.php");
 include("groups.php");
 include("searchClass.php");
 include("forumClasses.php");
+include("adminClasses.php");
 $DB=new DatabaseCon();
 $DB->connect();
 ?>

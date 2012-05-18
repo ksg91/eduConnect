@@ -168,7 +168,6 @@ class User
     $widget='<div>';
     $widget.='<ul style="list-style:none;">';
     $widget.='<li><a href="sendPM.php?to='.$this->id.'">Send PM</a></li>';
-    $widget.='<li><a href="addFriend.php">Add As A Friend</a></li>';
     $widget.='</ul>';
     $widget.='</div>';
     return $widget;
@@ -190,6 +189,69 @@ class User
   function getUnreadPMCount()
   {
     return mysql_result(mysql_query("SELECT COUNT(*) FROM pms WHERE `read`=0 AND `to`=".$this->id),0);
+  }
+}
+class HOD extends User{
+  var $id;
+  function __construct($id)
+  {
+    parent::__construct($id);
+    $this->id=$id;
+  }
+  function addForum($name,$perm,$sec_id)
+  {
+    $q=mysql_query("INSERT INTO forum SET name='".$name."',perm=".$perm.",sec_id=".$sec_id);
+    if($q)
+      return true;
+    else 
+      return false;
+  }
+  function addGroup($name)
+  {
+  }
+  function addMember($g_id,$u_id)
+  {
+  }
+}
+class Principal extends HOD {
+  var $id;
+  function __construct($id)
+  {
+    parent::__construct($id);
+    $this->id=$id;
+  }
+  function addForumSection($name)
+  {
+  } 
+}
+class ColAdmin extends Principal {
+  var $id;
+  function __construct($id)
+  {
+    parent::__construct($id);
+    $this->id=$id;
+  }
+  function addStudent($name)
+  {
+  } 
+}
+class UniHead extends ColAdmin {
+  var $id;
+  function __construct($id)
+  {
+    parent::__construct($id);
+    $this->id=$id;
+  }
+}
+class UniAdmin extends UniHead {
+  var $id;
+  function __construct($id)
+  {
+    parent::__construct($id);
+    $this->id=$id;
+  }
+  function addCollege()
+  {
   }
 }
 ?>
