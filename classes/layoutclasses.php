@@ -50,6 +50,7 @@ class LayoutStruct
     echo " | <a href=\"".ABS_PATH."/pms.php\">PMs</a>";
     echo " | <a href=\"".ABS_PATH."/forums.php\">Forums</a>";
     echo " | <a href=\"".ABS_PATH."/chats.php\">Chats</a>";
+    echo " | <a href=\"".ABS_PATH."/adminMenu.php\">Admin Menu</a>";
     echo "<div style=\"text-align:right;\">";
     echo "<form action=\"search.php\" method=\"post\">";
     echo "<b style=\"color:#CCCCCC;\">Search:</b><input type=\"text\" name=\"criteria\" />";
