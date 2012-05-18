@@ -1,6 +1,6 @@
 <?php
 include ("classes/includes.php");
-UtilClass::requireLogin(ABS_PATH."adminMenu.php");
+UtilClass::requireLogin(ABS_PATH."/adminMenu.php");
 $html=new HtmlHeads();
 $user=new User($_SESSION['id']);
 $html->putHead();

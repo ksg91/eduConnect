@@ -200,7 +200,7 @@ class HOD extends User{
   }
   function addForum($name,$perm,$sec_id)
   {
-    $q=mysql_query("INSERT INTO forum SET name='".$name."',perm=".$perm.",sec_id=".$sec_id);
+    $q=mysql_query("INSERT INTO forum SET name='".$name."',perm_g=".$perm.",sec_id=".$sec_id);
     if($q)
       return true;
     else 
@@ -208,9 +208,27 @@ class HOD extends User{
   }
   function addGroup($name)
   {
+    $q=mysql_query("INSERT INTO perm_group SET name='".$name."',created_by=".$this->id);
+    if($q)
+      return true;
+    else 
+      return false;
   }
   function addMember($g_id,$u_id)
   {
+    $q=mysql_query("INSERT INTO perm_member SET perm_id='".$g_id."',u_id=".$u_id.",mem_since=SYSDATE(),accepted=1");
+    if($q)
+      return true;
+    else 
+      return false;
+  }
+  function addChatroom($name,$g_id)
+  {
+    $q=mysql_query("INSERT INTO chatrooms SET perm='".$g_id."',name='".$name."'");
+    if($q)
+      return true;
+    else 
+      return false;
   }
 }
 class Principal extends HOD {
@@ -222,6 +240,11 @@ class Principal extends HOD {
   }
   function addForumSection($name)
   {
+    $q=mysql_query("INSERT INTO forum_sec SET name='".$name."'");
+    if($q)
+      return true;
+    else 
+      return false;
   } 
 }
 class ColAdmin extends Principal {
@@ -241,17 +264,6 @@ class UniHead extends ColAdmin {
   {
     parent::__construct($id);
     $this->id=$id;
-  }
-}
-class UniAdmin extends UniHead {
-  var $id;
-  function __construct($id)
-  {
-    parent::__construct($id);
-    $this->id=$id;
-  }
-  function addCollege()
-  {
   }
 }
 ?>
