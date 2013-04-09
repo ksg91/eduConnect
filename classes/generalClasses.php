@@ -4,12 +4,15 @@ class Login {
   var $remember;
   function __construct($email,$pw,$remember)
   {
-    $this->email=$email;
-    $this->pw=$pw;
+    $this->email=trim($email);
+    $this->pw=trim($pw);
     $this->remember=$remember;
   }
   function isValidLogin()
   {
+    if(strlen($this->email)==0 || strlen($this->pw)==0){
+      return false;
+    }
     $rpw=mysql_result(mysql_query("SELECT pass FROM `users` WHERE `email`='".$this->email."'"),0);
     if($rpw==$this->pw)
       return true;
